@@ -1,6 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Joguinho.Scripts.GameComponents;
+using Joguinho.Scripts.GameComponents.Physics;
+using Joguinho.Scripts.GameComponents.Physics.Collision;
+using Joguinho.Scripts.Graphics;
 using Microsoft.Xna.Framework;
+using System;
+using System.Collections.Generic;
 
 namespace Joguinho.Scripts
 {
@@ -16,6 +20,12 @@ namespace Joguinho.Scripts
             Projectile newProjectile = new Projectile(origin);
             newProjectile.UpdateAngle(rotation);
             newProjectile.SetTimerToDestroy(timer);
+            ComponentUtilities.AddBoxCollider(newProjectile, 3, 3);
+            newProjectile.AddComponent<Rigidbody>();
+            newProjectile.StartObject();
+            ComponentUtilities.AddSprite(newProjectile, 34, 16, 16, 2);
+
+            World.worldInstance.projectiles.Add(newProjectile);
         }
 
         public static Vector2 DiffBetweenA_B(Vector2 pointA, Vector2 pointB)

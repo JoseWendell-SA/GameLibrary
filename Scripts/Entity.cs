@@ -7,8 +7,6 @@ namespace Joguinho.Scripts
 {
     public class Entity : Object
     {
-        Camera camera;
-
         public Entity(Vector2 newPosition) : base(newPosition)
         {
 
@@ -25,11 +23,6 @@ namespace Joguinho.Scripts
         public virtual void Move()
         {
             
-        }
-
-        public void SetCamera(Camera newCamera)
-        {
-            camera = newCamera;
         }
     }
 }

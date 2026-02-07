@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Joguinho.Scripts.GameComponents.Physics.Interface;
 
 namespace Joguinho.Scripts.GameComponents.Physics.Collision
 {
@@ -16,15 +17,41 @@ namespace Joguinho.Scripts.GameComponents.Physics.Collision
 
         public override void Update()
         {
-            min = new Vector2(gameObject.GetPosition().X - (size.X/2) + localPosition.X, gameObject.GetPosition().Y - (size.Y/2) + localPosition.Y);
-            max = new Vector2(gameObject.GetPosition().X + (size.X/2) + localPosition.X, gameObject.GetPosition().Y + (size.Y/2) + localPosition.Y);
+            if (gameObject != null)
+            {
+                UpdateBox();
+            }
         }
 
-        public void SetBoxSize(Vector2 newSize)
+        public void SetNewBoxSize(Vector2 newSize)
         {
             size = newSize;
-            min = new Vector2(gameObject.GetPosition().X - (size.X/2) + localPosition.X, gameObject.GetPosition().Y - (size.Y/2) + localPosition.Y);
-            max = new Vector2(gameObject.GetPosition().X + (size.X/2) + localPosition.X, gameObject.GetPosition().Y + (size.Y/2) + localPosition.Y);
+
+            if (gameObject != null)
+            {
+                UpdateBox();
+            }
+
+            else
+            {
+                min = new Vector2(localPosition.X - (size.X / 2), localPosition.Y - (size.Y / 2));
+                max = new Vector2(localPosition.X + (size.X / 2), localPosition.Y + (size.Y / 2));
+            }
+        }
+
+        private void UpdateBox()
+        {
+            min = new Vector2(gameObject.GetPosition().X - (size.X / 2) + localPosition.X, gameObject.GetPosition().Y - (size.Y / 2) + localPosition.Y);
+            max = new Vector2(gameObject.GetPosition().X + (size.X / 2) + localPosition.X, gameObject.GetPosition().Y + (size.Y / 2) + localPosition.Y);
+        }
+
+        public override void OnCollision(Collider collider)
+        {
+            IOnCollisionEnter IcollsionEnter = gameObject as IOnCollisionEnter;
+            if (IcollsionEnter != null)
+            {
+                IcollsionEnter.OnCollisionEnter(collider);
+            }
         }
     }
 }

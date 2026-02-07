@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using Joguinho.Scripts.GameComponents.Physics;
+using Joguinho.Scripts.GameComponents.Physics.Collision;
+using Joguinho.Scripts.GameComponents.Physics.Interface;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 
 namespace Joguinho.Scripts
 {
-    public class Player : Entity
+    public class Player : Entity, IOnCollisionEnter
     {
         private KeyboardState keyboardPrev = new KeyboardState();
         private MouseState mousePrev = new MouseState();
@@ -23,7 +25,7 @@ namespace Joguinho.Scripts
         {
             //rigidbody = new Rigidbody(this);
             //components.Add(rigidbody);
-            AddComponent<Rigidbody>(this);
+            AddComponent<Rigidbody>();
             rigidbody = GetComponent<Rigidbody>();
         }
 
@@ -79,18 +81,6 @@ namespace Joguinho.Scripts
                 }
             }
 
-            if (keyboardPrev.IsKeyUp(Keys.E) && keyboardCur.IsKeyDown(Keys.E))
-            {
-                rotation += 1;
-                Console.WriteLine("Rotation: " + rotation + "\nMath.Sin: " + Math.Sin(rotation) + "\nMath.Cos: " + Math.Cos(rotation) + "\n\n\n");
-            }
-
-            if (keyboardPrev.IsKeyUp(Keys.Q) && keyboardCur.IsKeyDown(Keys.Q))
-            {
-                rotation -= 1;
-                Console.WriteLine("Rotation: " + rotation + "\nMath.Sin: " + Math.Sin(rotation) + "\nMath.Cos: " + Math.Cos(rotation) + "\n\n\n");
-            }
-
             if (keyboardPrev.IsKeyUp(Keys.C) && keyboardCur.IsKeyDown(Keys.C))
             {
                 
@@ -109,6 +99,11 @@ namespace Joguinho.Scripts
         public override void Move()
         {
             
+        }
+
+        public void OnCollisionEnter(Collider collider)
+        {
+
         }
     }
 }

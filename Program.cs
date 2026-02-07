@@ -112,9 +112,8 @@ class Program : Game
         KeyboardState keyboardCur = Keyboard.GetState();
         GamePadState gpCur = GamePad.GetState(PlayerIndex.One);
 
-        player.Update();
         camera.Update();
-        world.Update();
+        gameManager.Update();
         MouseInput.UpdateMouse();
 
         if (keyboardCur.IsKeyDown(Keys.L) && keyboardPrev.IsKeyUp(Keys.L))
@@ -125,8 +124,9 @@ class Program : Game
         if (keyboardCur.IsKeyDown(Keys.K) && keyboardPrev.IsKeyUp(Keys.K))
         {
             Vector2 direction = GameUtilities.DiffBetweenA_B(MouseInput.GetMouseMapPosition(), new Vector2(player.GetPosition().X - player.GetSpriteSize().X/2, player.GetPosition().Y - player.GetSpriteSize().Y/2));
-            float angleInDeg = (float)(Math.Atan2(direction.Y, direction.X));
-            player.rotation = angleInDeg;
+            float angle = (float)(Math.Atan2(direction.Y, direction.X));
+            player.rotation = angle;
+            GameUtilities.CreateProjectile(player.GetPosition(), 0, angle);
         }
 
         mousePrev = mouseCur;

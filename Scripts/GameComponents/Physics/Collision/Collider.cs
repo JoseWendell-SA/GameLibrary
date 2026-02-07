@@ -14,9 +14,14 @@ namespace Joguinho.Scripts.GameComponents.Physics.Collision
             
         }
 
-        public virtual void OnCollision()
+        public override void DeleteComponent()
         {
-            
+            GameManager.GMInstance.RemoveCollider(this);
+        }
+
+        public virtual void OnCollision(Collider collider)
+        {
+
         }
     }
 }

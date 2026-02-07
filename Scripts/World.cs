@@ -38,6 +38,7 @@ namespace Joguinho.Scripts
         };
 
         public List<Entity> entities = new List<Entity>();
+        public List<Projectile> projectiles = new List<Projectile>();
 
         public readonly Camera camera;
 
@@ -48,66 +49,23 @@ namespace Joguinho.Scripts
             entities.Add(player);
             entities[0].UpdatePosition(new Vector2(17, 17));
 
-            entities[0].AddComponent<BoxCollider>(entities[0]);
-            entities[0].GetComponent<BoxCollider>().SetBoxSize(new Vector2(16, 16));
+            entities[0].AddComponent<BoxCollider>();
+            entities[0].GetComponent<BoxCollider>().SetNewBoxSize(new Vector2(16, 16));
 
             worldInstance = this;
         }
 
         public void Update()
         {
-            /*foreach (List<Tile> tiles in map)
+            for (int n = 0; n < entities.Count ; n++)
             {
-                foreach (Tile tile in tiles)
-                {
-                    foreach (Entity entity in entities)
-                    {
-                        
-                    }
-                }
-            }*/
-
-            for (int y = 0; y < map.Count; y++)
-            {
-                for (int x = 0; x < map[y].Count; x++)
-                {
-                    BoxCollider boxCollider = map[y][x].GetComponent<BoxCollider>();
-
-                    if (boxCollider != null)
-                    {
-                        BoxCollider test = entities[0].GetComponent<BoxCollider>();
-
-                        if (AABBvsAABB(test, boxCollider))
-                        {
-                            //Console.WriteLine("Player - Min: " + test.min.X + ", " + test.min.Y + " Max: " + test.max.X + ", " + test.max.Y);
-                            //Console.WriteLine("Min: " + boxCollider.min.X + ", " + boxCollider.min.Y + " Max: " + boxCollider.max.X + ", " + boxCollider.max.Y);
-                        }
-                    }
-                }
-            }
-        }
-
-        public List<Object> DoesItCollides(BoxCollider target)
-        {
-            List<Object> gameObjects = new List<Object>();
-
-            for (int y = 0; y < map.Count; y++)
-            {
-                for (int x = 0; x < map[y].Count; x++)
-                {
-                    BoxCollider box = map[y][x].GetComponent<BoxCollider>();
-
-                    if (box != null)
-                    {
-                        if (AABBvsAABB(target, box))
-                        {
-                            gameObjects.Add(map[y][x]);
-                        }
-                    }
-                }
+                entities[n].Update();
             }
 
-            return gameObjects;
+            for (int n = 0; n < projectiles.Count ; n++)
+            {
+                projectiles[n].Update();
+            }
         }
 
         public bool AABBvsAABB(BoxCollider a, BoxCollider b)

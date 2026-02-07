@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
+using Joguinho.Scripts.Graphics.Interface;
 
 namespace Joguinho.Scripts.Graphics
 {
@@ -48,6 +49,11 @@ namespace Joguinho.Scripts.Graphics
         public int GetLayer()
         {
             return layer;
+        }
+
+        public override void DeleteComponent()
+        {
+            InterfaceManager.RemoveSprite(this);
         }
     }
 }

@@ -27,6 +27,11 @@ namespace Joguinho.Scripts
             position = newPosition;
         }
 
+        public virtual void StartObject()
+        {
+            
+        }
+
         public virtual void Update()
         {
             if (startTimer)
@@ -88,9 +93,19 @@ namespace Joguinho.Scripts
             return null;
         }
 
-        public void AddComponent<T>(object newGameObject) where T : ObjectComponent
+        public void AddComponent<T>() where T : ObjectComponent
         {
-            components.Add((T)Activator.CreateInstance(typeof(T), new object[] {newGameObject}));
+            components.Add((T)Activator.CreateInstance(typeof(T), new object[] {this}));
+        }
+
+        public void RemoveAllComponents()
+        {
+            for (int n = 0 ; n < components.Count; n++)
+            {
+                components[n].DeleteComponent();
+            }
+
+            components.RemoveRange(0, components.Count);
         }
 
         public void SetTimerToDestroy(float newTimer)

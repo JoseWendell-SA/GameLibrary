@@ -12,6 +12,11 @@ namespace Joguinho.Scripts.GameComponents
             gameObject = newGameObject;
         }
 
+        public virtual void DeleteComponent()
+        {
+            
+        }
+
         public virtual void Update()
         {
             

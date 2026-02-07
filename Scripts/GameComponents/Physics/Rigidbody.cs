@@ -23,14 +23,19 @@ namespace Joguinho.Scripts.GameComponents.Physics
         {
             BoxCollider simulatedCollision = new BoxCollider(gameObject);
             simulatedCollision.localPosition = new Vector2(direction.X, direction.Y);
-            simulatedCollision.SetBoxSize(gameObject.GetComponent<BoxCollider>().size);
+            simulatedCollision.SetNewBoxSize(gameObject.GetComponent<BoxCollider>().size);
 
-            List<Object> collidingWith = GameManager.GMInstance.world.DoesItCollides(simulatedCollision);
+            List<Object> collidingWith = GameManager.GMInstance.DoesItCollides(simulatedCollision);
 
             if (collidingWith.Count == 0)
             {
                 gameObject.UpdatePosition(direction);
                 //gameObject.UpdateRotation(rotationDir);
+            }
+
+            else
+            {
+                gameObject.UpdatePosition(direction);
             }
         }
 
