@@ -44,7 +44,7 @@ namespace Joguinho.Scripts
 
         public void OnCollisionEnter(Collider collider)
         {
-            if (collider.collisionTag.Contains(CollisionTag.Enemy) || collider.collisionTag.Contains(CollisionTag.Terrain))
+            if (collider.collisionTag.Contains(CollisionTag.Enemy))
             {
                 GameManager.GMInstance.DeleteObject(this);
             }

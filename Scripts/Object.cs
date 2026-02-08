@@ -10,8 +10,6 @@ namespace Joguinho.Scripts
     {
         protected Vector2 position;
 
-        protected Vector2 SpriteSize = new Vector2(16, 16);
-
         protected List<ObjectComponent> components = new List<ObjectComponent>();
 
         public float rotation = 0;

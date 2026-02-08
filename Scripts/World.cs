@@ -8,6 +8,9 @@ using Joguinho.Scripts.Graphics.Interface;
 using Joguinho.Scripts.GameComponents;
 using Joguinho.Scripts.GameComponents.Physics;
 
+//Test, delete later
+using Joguinho.Scripts.Entities;
+
 namespace Joguinho.Scripts
 {
     public class World
@@ -16,7 +19,7 @@ namespace Joguinho.Scripts
 
         public List<List<Tile>> map = new List<List<Tile>>();
 
-        public int[][] testMap = new int[][]
+        /*public int[][] testMap = new int[][]
         {
             new int[]{8, 8, 8, 8, 8, 8, 8, 8, 8},
             new int[]{8, 1, 1, 1, 2, 3, 1, 1, 8},
@@ -35,7 +38,7 @@ namespace Joguinho.Scripts
             new int[]{1, 0, 0, 0, 0, 0, 0, 0, 1},
             new int[]{1, 0, 0, 0, 0, 0, 0, 0, 1},
             new int[]{1, 1, 1, 1, 1, 1, 1, 1, 1}
-        };
+        };*/
 
         public List<Entity> entities = new List<Entity>();
         public List<Projectile> projectiles = new List<Projectile>();
@@ -48,9 +51,6 @@ namespace Joguinho.Scripts
             camera.DefineTarget(player);
             entities.Add(player);
             entities[0].UpdatePosition(new Vector2(17, 17));
-
-            entities[0].AddComponent<BoxCollider>();
-            entities[0].GetComponent<BoxCollider>().SetNewBoxSize(new Vector2(16, 16));
 
             worldInstance = this;
         }
@@ -92,9 +92,11 @@ namespace Joguinho.Scripts
 
         public void InsertObject()
         {
-            ComponentUtilities.AddSprite(entities[0], 35, 16, 16, 1);
+            ComponentUtilities.AddSprite(entities[0], 35, 16, 16, 2);
+            ComponentUtilities.AddSprite(entities[1], 35, 16, 16, 2);
+            entities[1].StartObject();
 
-            for (int y = 0; y < testMap.Length; y++)
+            /*for (int y = 0; y < testMap.Length; y++)
             {
                 map.Add(new List<Tile>());
                 for (int x = 0; x < testMap[y].Length; x++)
@@ -107,7 +109,7 @@ namespace Joguinho.Scripts
                         ComponentUtilities.AddTileCollider(map[y][x], 14, 14);
                     }
                 }
-            }
+            }*/
         }
     }
 }

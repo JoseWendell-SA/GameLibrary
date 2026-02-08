@@ -20,12 +20,10 @@ namespace Joguinho.Scripts
             Projectile newProjectile = new Projectile(origin);
             newProjectile.UpdateAngle(rotation);
             newProjectile.SetTimerToDestroy(timer);
-            ComponentUtilities.AddBoxCollider(newProjectile, 3, 3);
+            ComponentUtilities.AddBoxCollider(newProjectile, 3, 3, collisionTag);
             newProjectile.AddComponent<Rigidbody>();
             newProjectile.StartObject();
             ComponentUtilities.AddSprite(newProjectile, 34, 16, 16, 2);
-
-            newProjectile.GetComponent<BoxCollider>().SetNewCollisionTag(collisionTag);
 
             World.worldInstance.projectiles.Add(newProjectile);
         }

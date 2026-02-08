@@ -26,10 +26,12 @@ namespace Joguinho.Scripts.GameComponents
             InterfaceManager.InsertSprite(sprite);
         }
 
-        public static void AddBoxCollider(Object gameObject, int sizeX, int sizeY)
+        public static void AddBoxCollider(Object gameObject, int sizeX, int sizeY, List<CollisionTag> collisionTags)
         {
             gameObject.AddComponent<BoxCollider>();
             BoxCollider boxCollider = gameObject.GetComponent<BoxCollider>();
+            boxCollider.SetNewBoxSize(new Vector2(sizeX, sizeY));
+            boxCollider.SetNewCollisionTag(collisionTags);
 
             GameManager.GMInstance.InsertNewBoxCollider(boxCollider);
         }

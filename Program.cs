@@ -129,7 +129,7 @@ class Program : Game
             Vector2 direction = GameUtilities.DiffBetweenA_B(MouseInput.GetMouseMapPosition(), new Vector2(player.GetPosition().X - player.GetComponent<Sprite>().GetSize().X/2, player.GetPosition().Y - player.GetComponent<Sprite>().GetSize().Y/2));
             float angle = (float)(Math.Atan2(direction.Y, direction.X));
             player.rotation = angle;
-            List<CollisionTag> collisionTags = [CollisionTag.Enemy, CollisionTag.Terrain];
+            List<CollisionTag> collisionTags = [CollisionTag.Projectile];
             GameUtilities.CreateProjectile(player.GetPosition(), 120, angle, collisionTags);
         }
 

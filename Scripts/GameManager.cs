@@ -1,6 +1,10 @@
-﻿using Joguinho.Scripts.GameComponents.Physics.Collision;
+﻿using Joguinho.Scripts.Entities;
+using Joguinho.Scripts.GameComponents;
+using Joguinho.Scripts.GameComponents.Physics.Collision;
 using System;
 using System.Collections.Generic;
+
+using Microsoft.Xna.Framework;
 
 namespace Joguinho.Scripts
 {
@@ -12,19 +16,30 @@ namespace Joguinho.Scripts
 
         private List<BoxCollider> colliders = new List<BoxCollider>();
 
+        private List<Object> deleteList = new List<Object>();
+
         public GameManager(World newWorld)
         {
-            GMInstance = this;
             world = newWorld;
+            GMInstance = this;
+
+            world.entities.Add(new GenericEnemy(new Vector2(-10, -10)));
+
+            List<CollisionTag> test = [CollisionTag.Player];
+            List<CollisionTag> test2 = [CollisionTag.Enemy];
+
+            ComponentUtilities.AddBoxCollider(world.entities[0], 16, 16, test);
+            ComponentUtilities.AddBoxCollider(world.entities[1], 16, 16, test2);
         }
 
         public void Update()
         {
             world.Update();
             IdentifyCollidingBoxes();
+            ClearAllObjectsInDeleteList();
         }
 
-        public void IdentifyCollidingBoxes()
+        private void IdentifyCollidingBoxes()
         {
             for (int n = 0; n < colliders.Count; n++)
             {
@@ -32,19 +47,8 @@ namespace Joguinho.Scripts
                 {
                     if (AABBvsAABB(colliders[n], colliders[m]))
                     {
-                        int k = 0;
-                        while (k < colliders[n].collisionTag.Count)
-                        {
-                            if (colliders[m].collisionTag.Contains(colliders[n].collisionTag[k]))
-                            {
-                                colliders[n].OnCollision(colliders[m]);
-                                colliders[m].OnCollision(colliders[n]);
-
-                                k = colliders[n].collisionTag.Count;
-                            }
-
-                            k++;
-                        }
+                        colliders[n].OnCollision(colliders[m]);
+                        colliders[m].OnCollision(colliders[n]);
                     }
                 }
             }
@@ -52,7 +56,10 @@ namespace Joguinho.Scripts
 
         public void InsertNewBoxCollider(BoxCollider newBoxCollider)
         {
-            colliders.Add(newBoxCollider);
+            if (!colliders.Contains(newBoxCollider))
+            {
+                colliders.Add(newBoxCollider);
+            }
         }
 
         public List<Object> DoesItCollides(BoxCollider target)
@@ -91,17 +98,47 @@ namespace Joguinho.Scripts
 
         public void DeleteObject(Object oldObject)
         {
-            oldObject.RemoveAllComponents();
-
-            if (oldObject is Projectile)
+            if (!deleteList.Contains(oldObject))
             {
-                world.projectiles.Remove(oldObject as Projectile);
+                deleteList.Add(oldObject);
+            }
+        }
+
+        private void ClearAllObjectsInDeleteList()
+        {
+            while (deleteList.Count > 0)
+            {
+                deleteList[0].RemoveAllComponents();
+
+                if (deleteList[0] is Projectile)
+                {
+                    world.projectiles.Remove(deleteList[0] as Projectile);
+                }
+
+                else if (deleteList[0] is Entity)
+                {
+                    world.entities.Remove(deleteList[0] as Entity);
+                }
+
+                deleteList.RemoveAt(0);
+            }
+        }
+
+        public Entity GetEntityByCollisionTag(CollisionTag targetTag)
+        {
+            int n = 0;
+
+            while (n < world.entities.Count)
+            {
+                if (world.entities[n].GetComponent<BoxCollider>().collisionTag.Contains(targetTag))
+                {
+                    return world.entities[n];
+                }
+
+                n++;
             }
 
-            else if (oldObject is Entity)
-            {
-                world.entities.Remove(oldObject as Entity);
-            }
+            return null;
         }
     }
 }

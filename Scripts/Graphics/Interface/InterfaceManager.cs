@@ -26,26 +26,29 @@ namespace Joguinho.Scripts.Graphics.Interface
                 int n = 1;
                 int newSpriteLayer = newSprite.GetLayer();
 
-                if (sprites[0].GetLayer() > newSpriteLayer)
+                if (!sprites.Contains(newSprite))
                 {
-                    sprites.Insert(0, newSprite);
-                }
-
-                else
-                {
-                    while (n < sprites.Count && newSpriteLayer > sprites[n].GetLayer())
+                    if (sprites[0].GetLayer() > newSpriteLayer)
                     {
-                        n++;
-                    }
-
-                    if (n == sprites.Count)
-                    {
-                        sprites.Add(newSprite);
+                        sprites.Insert(0, newSprite);
                     }
 
                     else
                     {
-                        sprites.Insert(n, newSprite);
+                        while (n < sprites.Count && newSpriteLayer > sprites[n].GetLayer())
+                        {
+                            n++;
+                        }
+
+                        if (n == sprites.Count)
+                        {
+                            sprites.Add(newSprite);
+                        }
+
+                        else
+                        {
+                            sprites.Insert(n, newSprite);
+                        }
                     }
                 }
             }
