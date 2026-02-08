@@ -57,8 +57,8 @@ namespace Joguinho.Scripts.Graphics.Interface
 
         public static void RemoveSprite(Sprite oldSprite)
         {
-            Console.WriteLine("Total: " + sprites.Count);
             sprites.Remove(oldSprite);
+            Console.WriteLine("Total: " + sprites.Count);
         }
 
         public static void DrawElements(Texture2D texture)
@@ -70,7 +70,7 @@ namespace Joguinho.Scripts.Graphics.Interface
 
             if (GameManager.GMInstance.gameLevel == 0)
             {
-                batch.DrawString(spriteFont, "Press \"L\" to start", new Vector2(120, 120), Color.White, 0, Vector2.One, 0.3f, SpriteEffects.None, 1);
+                batch.DrawString(spriteFont, "Press \"L\" to start", new Vector2(120, 110), Color.White, 0, Vector2.One, 0.3f, SpriteEffects.None, 1);
             }
 
             else if (GameManager.GMInstance.gameLevel == 1)
@@ -93,7 +93,7 @@ namespace Joguinho.Scripts.Graphics.Interface
 
             else if (GameManager.GMInstance.gameLevel == 2)
             {
-
+                batch.DrawString(spriteFont, "You Died! Press \"L\" to continue", new Vector2(120, 110), Color.White, 0, Vector2.One, 0.3f, SpriteEffects.None, 1);
             }
             
             batch.End();

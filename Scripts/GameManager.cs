@@ -5,12 +5,14 @@ using System;
 using System.Collections.Generic;
 
 using Microsoft.Xna.Framework;
+using Joguinho.Scripts.EventSystem;
 
 namespace Joguinho.Scripts
 {
     public class GameManager
     {
         public static GameManager GMInstance;
+        private EnemyGeneratorSystem enemyGenerator;
 
         public World world;
 
@@ -18,7 +20,8 @@ namespace Joguinho.Scripts
 
         private List<Object> deleteList = new List<Object>();
 
-        public int gameLevel = 0;
+        public int gameLevel {get; private set;} = 0;
+        public int difficultyLevel = 1;
         public int score = 0;
 
         public GameManager(World newWorld)
@@ -26,20 +29,29 @@ namespace Joguinho.Scripts
             world = newWorld;
             GMInstance = this;
 
-            world.entities.Add(new GenericEnemy(new Vector2(-10, -10)));
-
             List<CollisionTag> test = [CollisionTag.Player];
-            List<CollisionTag> test2 = [CollisionTag.Enemy];
 
-            ComponentUtilities.AddBoxCollider(world.entities[0], 16, 16, test);
-            ComponentUtilities.AddBoxCollider(world.entities[1], 16, 16, test2);
+            ComponentUtilities.AddBoxCollider(world.entities[0], 12, 12, test);
+            enemyGenerator = new EnemyGeneratorSystem(world.entities[0]);
         }
 
-        public void Update()
+        public void Update(GameTime gameTime)
         {
             world.Update();
             IdentifyCollidingBoxes();
             ClearAllObjectsInDeleteList();
+            enemyGenerator.Update();
+
+            if ((int)gameTime.TotalGameTime.TotalSeconds > 0 && (int)gameTime.TotalGameTime.TotalSeconds % (15 * difficultyLevel) == 0)
+            {
+                difficultyLevel += 1;
+                Console.WriteLine("Difficulty Level Increased: " + difficultyLevel);
+            }
+        }
+
+        public void NotifyPlayerAboutEnemyDeath(int num)
+        {
+            (world.entities[0] as Player).AddXp(num);
         }
 
         private void IdentifyCollidingBoxes()
@@ -95,8 +107,8 @@ namespace Joguinho.Scripts
 
         public void RemoveCollider(Collider oldCollider)
         {
-            Console.WriteLine("Total Colliders: " + colliders.Count);
             colliders.Remove(oldCollider as BoxCollider);
+            Console.WriteLine("Total Colliders: " + colliders.Count);
         }
 
         public void DeleteObject(Object oldObject)

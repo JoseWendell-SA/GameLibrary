@@ -36,7 +36,7 @@ namespace Joguinho.Scripts.Input
 
         public static Vector2 GetMouseMapPosition()
         {
-            return new Vector2(posX + World.worldInstance.camera.GetX(), posY + World.worldInstance.camera.GetY());
+            return new Vector2(posX + GameManager.GMInstance.world.camera.GetX(), posY + GameManager.GMInstance.world.camera.GetY());
         }
 
         private static void UpdatePosition()

@@ -14,7 +14,8 @@ namespace Joguinho.Scripts.Entities
 
         private Rigidbody rigidbody;
 
-        private float health = 3;
+        private int health = 3;
+        private int enemyType = 1;
 
         private int score = 10;
 
@@ -46,6 +47,15 @@ namespace Joguinho.Scripts.Entities
             base.Update();
         }
 
+        public void ChangeType(int num)
+        {
+            health *= num + GameManager.GMInstance.difficultyLevel / 2;
+            enemyType = num;
+            score = score * enemyType + GameManager.GMInstance.difficultyLevel * 2;
+
+            speed = speed + (((float)num-1)/3) + (GameManager.GMInstance.difficultyLevel-1)/10;
+        }
+
         public void OnCollisionEnter(Collider collider)
         {
             if (collider.collisionTag.Contains(CollisionTag.Projectile))
@@ -54,6 +64,10 @@ namespace Joguinho.Scripts.Entities
 
                 if (health <= 0)
                 {
+                    GameManager.GMInstance.NotifyPlayerAboutEnemyDeath(enemyType * GameManager.GMInstance.difficultyLevel);
+
+                    Console.WriteLine("Enemy tier " + enemyType + " has been destroyed");
+                    
                     GameManager.GMInstance.score += score;
                     GameManager.GMInstance.DeleteObject(this);
                 }

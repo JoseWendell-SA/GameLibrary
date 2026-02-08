@@ -9,6 +9,8 @@ namespace Joguinho.Scripts
 {
     public class Projectile : Object, IOnCollisionEnter
     {
+        private Player origin;
+
         private float speed = 2.5f;
 
         private Rigidbody rigidbody;
@@ -40,6 +42,16 @@ namespace Joguinho.Scripts
         public void ChangeSpeed(float newSpeed)
         {
             speed = newSpeed;
+        }
+
+        public void SetNewOrigin(Player player)
+        {
+            origin = player;
+        }
+
+        public Player GetOrigin()
+        {
+            return origin;
         }
 
         public void OnCollisionEnter(Collider collider)

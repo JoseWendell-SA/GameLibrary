@@ -127,10 +127,10 @@ class Program : Game
             gameManager.ChangeGameLevel(1);
         }
 
-        if (!pause)
+        if (gameManager.gameLevel == 1)
         {
             camera.Update();
-            gameManager.Update();
+            gameManager.Update(gameTime);
         }
 
         mousePrev = mouseCur;

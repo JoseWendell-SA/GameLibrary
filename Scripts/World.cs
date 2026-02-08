@@ -15,8 +15,6 @@ namespace Joguinho.Scripts
 {
     public class World
     {
-        public static World worldInstance;
-
         public List<List<Tile>> map = new List<List<Tile>>();
 
         /*public int[][] testMap = new int[][]
@@ -51,8 +49,6 @@ namespace Joguinho.Scripts
             camera.DefineTarget(player);
             entities.Add(player);
             entities[0].UpdatePosition(new Vector2(17, 17));
-
-            worldInstance = this;
         }
 
         public void Update()
@@ -93,8 +89,6 @@ namespace Joguinho.Scripts
         public void InsertObject()
         {
             ComponentUtilities.AddSprite(entities[0], 35, 16, 16, 2);
-            ComponentUtilities.AddSprite(entities[1], 35, 16, 16, 2);
-            entities[1].StartObject();
 
             /*for (int y = 0; y < testMap.Length; y++)
             {

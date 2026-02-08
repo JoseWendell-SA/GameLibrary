@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
+using System.Net.Security;
 
 namespace Joguinho.Scripts
 {
@@ -16,20 +17,23 @@ namespace Joguinho.Scripts
         private MouseState mousePrev = new MouseState();
         private MouseState mouseCur;
 
-        private int num = 0;
+        private float num = 0;
         private int timer = 1;
 
-        private int fireRate = 10;
-        private int timeToNextShot = 0;
+        private float fireRate = 10;
+        private float timeToNextShot = 0;
         private float speed = 1.5f;
 
         private Rigidbody rigidbody;
 
         private Vector2 mov = new Vector2(0, 0);
 
+        private int level = 1;
+        private int currentXp = 0;
+        private int xpRequired;
         private int health = 5;
         private int invunerabilityTime = 60;
-        private int timeToNextHit = 0;
+        private float timeToNextHit = 0;
 
         public Player(Vector2 newPosition) : base(newPosition)
         {
@@ -37,6 +41,8 @@ namespace Joguinho.Scripts
             //components.Add(rigidbody);
             AddComponent<Rigidbody>();
             rigidbody = GetComponent<Rigidbody>();
+
+            xpRequired = level * 10;
         }
 
         public override void Update()
@@ -116,9 +122,24 @@ namespace Joguinho.Scripts
             base.Update();
         }
 
-        public override void Move()
+        public void AddXp(int xp)
         {
-            
+            currentXp += xp;
+
+            if (currentXp >= xpRequired)
+            {
+                level += 1;
+                currentXp -= xpRequired;
+                xpRequired = xpRequired = level * 10;
+
+                if (fireRate > 3)
+                {
+                    fireRate -= 0.3f;
+                    speed += 0.05f;
+
+                    Console.WriteLine("Level increased! " + level);
+                }
+            }
         }
 
         public void OnCollisionEnter(Collider collider)
@@ -130,7 +151,12 @@ namespace Joguinho.Scripts
                     health -= 1;
                     timeToNextHit = num + invunerabilityTime;
 
-                    Console.WriteLine("You got hit!\nHealth: " + health);
+                    Console.WriteLine("You've got hit!\nHealth: " + health);
+
+                    if (health <= 0)
+                    {
+                        GameManager.GMInstance.ChangeGameLevel(2);
+                    }
                 }
             }
         }
