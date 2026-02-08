@@ -1,11 +1,13 @@
 ﻿using Joguinho.Scripts;
 using Joguinho.Scripts.GameComponents;
+using Joguinho.Scripts.GameComponents.Physics.Collision;
 using Joguinho.Scripts.Graphics.Interface;
 using Joguinho.Scripts.Input;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
+using System.Collections.Generic;
 using static System.Formats.Asn1.AsnWriter;
 
 class Program : Game
@@ -126,7 +128,8 @@ class Program : Game
             Vector2 direction = GameUtilities.DiffBetweenA_B(MouseInput.GetMouseMapPosition(), new Vector2(player.GetPosition().X - player.GetSpriteSize().X/2, player.GetPosition().Y - player.GetSpriteSize().Y/2));
             float angle = (float)(Math.Atan2(direction.Y, direction.X));
             player.rotation = angle;
-            GameUtilities.CreateProjectile(player.GetPosition(), 0, angle);
+            List<CollisionTag> collisionTags = [CollisionTag.Enemy, CollisionTag.Terrain];
+            GameUtilities.CreateProjectile(player.GetPosition(), 120, angle, collisionTags);
         }
 
         mousePrev = mouseCur;

@@ -15,7 +15,7 @@ namespace Joguinho.Scripts
             Object newGameObject = (T)Activator.CreateInstance(typeof(T), new object[] {  });
         }*/
 
-        public static void CreateProjectile(Vector2 origin, float timer, float rotation)
+        public static void CreateProjectile(Vector2 origin, int timer, float rotation, List<CollisionTag> collisionTag)
         {
             Projectile newProjectile = new Projectile(origin);
             newProjectile.UpdateAngle(rotation);
@@ -24,6 +24,8 @@ namespace Joguinho.Scripts
             newProjectile.AddComponent<Rigidbody>();
             newProjectile.StartObject();
             ComponentUtilities.AddSprite(newProjectile, 34, 16, 16, 2);
+
+            newProjectile.GetComponent<BoxCollider>().SetNewCollisionTag(collisionTag);
 
             World.worldInstance.projectiles.Add(newProjectile);
         }

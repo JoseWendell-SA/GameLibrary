@@ -40,6 +40,9 @@ namespace Joguinho.Scripts.GameComponents
             BoxCollider boxCollider = tile.GetComponent<BoxCollider>();
             boxCollider.SetNewBoxSize(new Vector2(sizeX, sizeY));
 
+            List<CollisionTag> collisionTag = [CollisionTag.Terrain];
+            boxCollider.SetNewCollisionTag(collisionTag);
+
             GameManager.GMInstance.InsertNewBoxCollider(tile.GetComponent<BoxCollider>());
         }
 

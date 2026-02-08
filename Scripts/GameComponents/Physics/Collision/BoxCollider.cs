@@ -44,14 +44,5 @@ namespace Joguinho.Scripts.GameComponents.Physics.Collision
             min = new Vector2(gameObject.GetPosition().X - (size.X / 2) + localPosition.X, gameObject.GetPosition().Y - (size.Y / 2) + localPosition.Y);
             max = new Vector2(gameObject.GetPosition().X + (size.X / 2) + localPosition.X, gameObject.GetPosition().Y + (size.Y / 2) + localPosition.Y);
         }
-
-        public override void OnCollision(Collider collider)
-        {
-            IOnCollisionEnter IcollsionEnter = gameObject as IOnCollisionEnter;
-            if (IcollsionEnter != null)
-            {
-                IcollsionEnter.OnCollisionEnter(collider);
-            }
-        }
     }
 }

@@ -12,7 +12,7 @@ namespace Joguinho.Scripts
 
         }
 
-        public virtual void Update()
+        public override void Update()
         {
             for (int n = 0; n < components.Count; n++)
             {

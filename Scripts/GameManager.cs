@@ -32,8 +32,19 @@ namespace Joguinho.Scripts
                 {
                     if (AABBvsAABB(colliders[n], colliders[m]))
                     {
-                        colliders[n].OnCollision(colliders[m]);
-                        colliders[m].OnCollision(colliders[n]);
+                        int k = 0;
+                        while (k < colliders[n].collisionTag.Count)
+                        {
+                            if (colliders[m].collisionTag.Contains(colliders[n].collisionTag[k]))
+                            {
+                                colliders[n].OnCollision(colliders[m]);
+                                colliders[m].OnCollision(colliders[n]);
+
+                                k = colliders[n].collisionTag.Count;
+                            }
+
+                            k++;
+                        }
                     }
                 }
             }

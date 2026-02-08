@@ -9,7 +9,7 @@ namespace Joguinho.Scripts
 {
     public class Projectile : Object, IOnCollisionEnter
     {
-        private float speed = 1;
+        private float speed = 2.5f;
 
         private Rigidbody rigidbody;
 
@@ -29,7 +29,7 @@ namespace Joguinho.Scripts
 
             Vector2 mov = new Vector2(MathF.Cos(rotation), MathF.Sin(rotation));
 
-            rigidbody.AddForce(mov);
+            rigidbody.AddForce(mov * speed);
 
             for (int n = 0; n < components.Count; n++)
             {
@@ -44,8 +44,10 @@ namespace Joguinho.Scripts
 
         public void OnCollisionEnter(Collider collider)
         {
-            if (!(collider.gameObject is Player))
+            if (collider.collisionTag.Contains(CollisionTag.Enemy) || collider.collisionTag.Contains(CollisionTag.Terrain))
+            {
                 GameManager.GMInstance.DeleteObject(this);
+            }
         }
     }
 }

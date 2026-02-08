@@ -20,7 +20,7 @@ namespace Joguinho.Scripts
         public float rotation = 0;
 
         protected bool startTimer = false;
-        protected float timer = 0;
+        protected float timerInFrames = 0;
 
         public Object(Vector2 newPosition)
         {
@@ -36,10 +36,12 @@ namespace Joguinho.Scripts
         {
             if (startTimer)
             {
-                if (timer <= 0)
+                if (timerInFrames <= 0)
                 {
-                    
+                    GameManager.GMInstance.DeleteObject(this);
                 }
+
+                timerInFrames -= 1;
             }
         }
 
@@ -108,9 +110,9 @@ namespace Joguinho.Scripts
             components.RemoveRange(0, components.Count);
         }
 
-        public void SetTimerToDestroy(float newTimer)
+        public void SetTimerToDestroy(int newTimerInFrames)
         {
-            timer = newTimer;
+            timerInFrames = newTimerInFrames;
             startTimer = true;
         }
     }
