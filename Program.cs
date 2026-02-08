@@ -35,6 +35,8 @@ class Program : Game
     World world;
     GameManager gameManager;
 
+    bool pause = true;
+
     private SpriteBatch batch;
     private Texture2D texture;
 
@@ -115,22 +117,19 @@ class Program : Game
         KeyboardState keyboardCur = Keyboard.GetState();
         GamePadState gpCur = GamePad.GetState(PlayerIndex.One);
 
-        camera.Update();
-        gameManager.Update();
+        
         MouseInput.UpdateMouse();
 
-        if (keyboardCur.IsKeyDown(Keys.L) && keyboardPrev.IsKeyUp(Keys.L))
+        if (keyboardCur.IsKeyDown(Keys.L) && keyboardPrev.IsKeyUp(Keys.L) && pause)
         {
             world.InsertObject();
+            pause = false;
         }
 
-        if (keyboardCur.IsKeyDown(Keys.K) && keyboardPrev.IsKeyUp(Keys.K))
+        if (!pause)
         {
-            Vector2 direction = GameUtilities.DiffBetweenA_B(MouseInput.GetMouseMapPosition(), new Vector2(player.GetPosition().X - player.GetComponent<Sprite>().GetSize().X/2, player.GetPosition().Y - player.GetComponent<Sprite>().GetSize().Y/2));
-            float angle = (float)(Math.Atan2(direction.Y, direction.X));
-            player.rotation = angle;
-            List<CollisionTag> collisionTags = [CollisionTag.Projectile];
-            GameUtilities.CreateProjectile(player.GetPosition(), 120, angle, collisionTags);
+            camera.Update();
+            gameManager.Update();
         }
 
         mousePrev = mouseCur;

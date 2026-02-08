@@ -1,10 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using Joguinho.Scripts.GameComponents.Physics;
+﻿using Joguinho.Scripts.GameComponents.Physics;
 using Joguinho.Scripts.GameComponents.Physics.Collision;
 using Joguinho.Scripts.GameComponents.Physics.Interface;
+using Joguinho.Scripts.Graphics;
+using Joguinho.Scripts.Input;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
+using System;
+using System.Collections.Generic;
 
 namespace Joguinho.Scripts
 {
@@ -16,6 +18,9 @@ namespace Joguinho.Scripts
 
         private int num = 0;
         private int timer = 1;
+
+        private int fireRate = 10;
+        private int timeToNextShot = 0;
 
         private Rigidbody rigidbody;
 
@@ -32,15 +37,16 @@ namespace Joguinho.Scripts
         public override void Update()
         {
             KeyboardState keyboardCur = Keyboard.GetState();
+            mouseCur = Mouse.GetState();
 
             num += 1;
 
-            if (keyboardCur.IsKeyDown(Keys.Up) && num % timer == 0)
+            if (keyboardCur.IsKeyDown(Keys.W))
             {
                 mov.Y = -1;
             }
 
-            else if (keyboardCur.IsKeyDown(Keys.Down) && num % timer == 0)
+            else if (keyboardCur.IsKeyDown(Keys.S))
             {
                 mov.Y = 1;
             }
@@ -50,12 +56,12 @@ namespace Joguinho.Scripts
                 mov.Y = 0;
             }
 
-            if (keyboardCur.IsKeyDown(Keys.Right) && num % timer == 0)
+            if (keyboardCur.IsKeyDown(Keys.D))
             {
                 mov.X = 1;
             }
 
-            else if (keyboardCur.IsKeyDown(Keys.Left) && num % timer == 0)
+            else if (keyboardCur.IsKeyDown(Keys.A))
             {
                 mov.X = -1;
             }
@@ -86,12 +92,21 @@ namespace Joguinho.Scripts
                 
             }
 
+            Vector2 direction = GameUtilities.DiffBetweenA_B(MouseInput.GetMouseMapPosition(), new Vector2(GetPosition().X - GetComponent<Sprite>().GetSize().X / 2, GetPosition().Y - GetComponent<Sprite>().GetSize().Y / 2));
+            float angle = (float)(Math.Atan2(direction.Y, direction.X));
+            rotation = angle;
+
+            if (mouseCur.LeftButton == ButtonState.Pressed && num > timeToNextShot)
+            {
+                List<CollisionTag> collisionTags = [CollisionTag.Projectile];
+                GameUtilities.CreateProjectile(GetPosition(), 120, angle, collisionTags);
+
+                timeToNextShot = num + fireRate;
+            }
+
             rigidbody.AddForce(mov);
             
             keyboardPrev = keyboardCur;
-
-            if (num >= 60)
-                num = 0;
 
             base.Update();
         }
