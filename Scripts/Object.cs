@@ -10,9 +10,6 @@ namespace Joguinho.Scripts
     {
         protected Vector2 position;
 
-        protected int SpriteX;
-        protected int SpriteY;
-
         protected Vector2 SpriteSize = new Vector2(16, 16);
 
         protected List<ObjectComponent> components = new List<ObjectComponent>();
@@ -59,27 +56,6 @@ namespace Joguinho.Scripts
         public Vector2 GetPosition()
         {
             return position;
-        }
-
-        public Vector2 GetSpriteSize()
-        {
-            return SpriteSize;
-        }
-
-        public int GetSpriteX()
-        {
-            return SpriteX * 16;
-        }
-
-        public int GetSpriteY()
-        {
-            return SpriteY * 16;
-        }
-
-        public void SetSprite(int x, int y)
-        {
-            SpriteX = x;
-            SpriteY = y;
         }
 
         public T GetComponent<T>() where T : ObjectComponent

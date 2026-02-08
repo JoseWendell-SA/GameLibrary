@@ -1,12 +1,13 @@
-﻿using System;
+﻿using Joguinho.Scripts.Graphics;
+using System;
 using System.Collections.Generic;
+using Microsoft.Xna.Framework;
 
 namespace Joguinho.Scripts
 {
     public class Camera
     {
-        public int X { get; private set; }
-        public int Y { get; private set; }
+        private Vector2 position;
 
         bool FreeMode = false;
         Entity Target;
@@ -15,27 +16,37 @@ namespace Joguinho.Scripts
 
         public Camera(int width, int height)
         {
-            X = 0;
-            Y = 0;
+            position = new Vector2(0, 0);
 
             offsetX = width / 2;
             offsetY = height / 2;
         }
 
-        public int GetX()
+        public float GetX()
         {
-            return X;
+            return position.X;
         }
 
-        public int GetY()
+        public float GetY()
         {
-            return Y;
+            return position.Y;
         }
 
         public void Update()
         {
-            X = (int)(Target.GetPosition().X - Target.GetSpriteSize().X / 2);
-            Y = (int)(Target.GetPosition().Y - Target.GetSpriteSize().Y / 2);
+            if (Target != null)
+            {
+                Sprite targetSprite = Target.GetComponent<Sprite>();
+
+                position.X = Target.GetPosition().X;
+                position.Y = Target.GetPosition().Y;
+                
+                if (targetSprite != null)
+                {
+                    position.X -= Target.GetComponent<Sprite>().GetSize().X / 2;
+                    position.Y -= Target.GetComponent<Sprite>().GetSize().Y / 2;
+                }
+            }
         }
 
         public void DefineTarget(Entity newTarget)

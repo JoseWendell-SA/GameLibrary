@@ -1,6 +1,7 @@
 ﻿using Joguinho.Scripts;
 using Joguinho.Scripts.GameComponents;
 using Joguinho.Scripts.GameComponents.Physics.Collision;
+using Joguinho.Scripts.Graphics;
 using Joguinho.Scripts.Graphics.Interface;
 using Joguinho.Scripts.Input;
 using Microsoft.Xna.Framework;
@@ -125,7 +126,7 @@ class Program : Game
 
         if (keyboardCur.IsKeyDown(Keys.K) && keyboardPrev.IsKeyUp(Keys.K))
         {
-            Vector2 direction = GameUtilities.DiffBetweenA_B(MouseInput.GetMouseMapPosition(), new Vector2(player.GetPosition().X - player.GetSpriteSize().X/2, player.GetPosition().Y - player.GetSpriteSize().Y/2));
+            Vector2 direction = GameUtilities.DiffBetweenA_B(MouseInput.GetMouseMapPosition(), new Vector2(player.GetPosition().X - player.GetComponent<Sprite>().GetSize().X/2, player.GetPosition().Y - player.GetComponent<Sprite>().GetSize().Y/2));
             float angle = (float)(Math.Atan2(direction.Y, direction.X));
             player.rotation = angle;
             List<CollisionTag> collisionTags = [CollisionTag.Enemy, CollisionTag.Terrain];
