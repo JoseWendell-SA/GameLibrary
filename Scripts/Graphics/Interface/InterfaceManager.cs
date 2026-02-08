@@ -10,6 +10,7 @@ namespace Joguinho.Scripts.Graphics.Interface
     public static class InterfaceManager
     {
         static SpriteBatch batch;
+        static SpriteFont spriteFont;
 
         static List<Sprite> sprites = new List<Sprite>();
 
@@ -64,25 +65,36 @@ namespace Joguinho.Scripts.Graphics.Interface
         {
             float posX;
             float posY;
+
             batch.Begin(SpriteSortMode.BackToFront, BlendState.AlphaBlend, SamplerState.PointClamp, DepthStencilState.None, RasterizerState.CullCounterClockwise);
-            for (int n = 0; n < sprites.Count; n++)
+
+            if (GameManager.GMInstance.gameLevel == 0)
             {
-                posX = (sprites[n].gameObject.GetPosition().X - sprites[n].GetSize().X / 2) - GameManager.GMInstance.world.camera.GetX() + GameManager.GMInstance.world.camera.offsetX;
-                posY = (sprites[n].gameObject.GetPosition().Y - sprites[n].GetSize().Y / 2) - GameManager.GMInstance.world.camera.GetY() + GameManager.GMInstance.world.camera.offsetY;
-                Rectangle rect = new Rectangle((int)sprites[n].GetSprite().X, (int)sprites[n].GetSprite().Y, (int)sprites[n].GetSize().X, (int)sprites[n].GetSize().Y);
-                Vector2 origin = new Vector2(rect.Width / 2, rect.Height / 2);
-                if (n == 1)
+                batch.DrawString(spriteFont, "Press \"L\" to start", new Vector2(120, 120), Color.White, 0, Vector2.One, 0.3f, SpriteEffects.None, 1); ;
+            }
+
+            else if (GameManager.GMInstance.gameLevel == 1)
+            {
+                for (int n = 0; n < sprites.Count; n++)
                 {
-                    //Console.WriteLine("X: " + posX + " | Y: " + posY);
+                    posX = (sprites[n].gameObject.GetPosition().X - sprites[n].GetSize().X / 2) - GameManager.GMInstance.world.camera.GetX() + GameManager.GMInstance.world.camera.offsetX;
+                    posY = (sprites[n].gameObject.GetPosition().Y - sprites[n].GetSize().Y / 2) - GameManager.GMInstance.world.camera.GetY() + GameManager.GMInstance.world.camera.offsetY;
+                    Rectangle rect = new Rectangle((int)sprites[n].GetSprite().X, (int)sprites[n].GetSprite().Y, (int)sprites[n].GetSize().X, (int)sprites[n].GetSize().Y);
+                    Vector2 origin = new Vector2(rect.Width / 2, rect.Height / 2);
+                    if (n == 1)
+                    {
+                        //Console.WriteLine("X: " + posX + " | Y: " + posY);
+                    }
+                    batch.Draw(texture, new Vector2(posX, posY), rect, Color.White, (float)sprites[n].gameObject.rotation, origin, 1f, SpriteEffects.None, 0);
                 }
-                batch.Draw(texture, new Vector2(posX, posY), rect, Color.White, (float)sprites[n].gameObject.rotation, origin, 1f, SpriteEffects.None, 0);
             }
             batch.End();
         }
 
-        public static void SetWorldAndSpriteBatch(World newWorld, SpriteBatch newBatch)
+        public static void SetWorldAndSpriteBatch(SpriteBatch newBatch, SpriteFont newFont)
         {
             batch = newBatch;
+            spriteFont = newFont;
         }
     }
 }

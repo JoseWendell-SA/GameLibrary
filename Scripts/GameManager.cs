@@ -18,6 +18,8 @@ namespace Joguinho.Scripts
 
         private List<Object> deleteList = new List<Object>();
 
+        public int gameLevel = 0;
+
         public GameManager(World newWorld)
         {
             world = newWorld;
@@ -139,6 +141,11 @@ namespace Joguinho.Scripts
             }
 
             return null;
+        }
+
+        public void ChangeGameLevel(int newLevel)
+        {
+            gameLevel = newLevel;
         }
     }
 }

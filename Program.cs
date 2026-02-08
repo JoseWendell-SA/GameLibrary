@@ -39,6 +39,7 @@ class Program : Game
 
     private SpriteBatch batch;
     private Texture2D texture;
+    SpriteFont spriteFont;
 
     KeyboardState keyboardPrev;
 
@@ -89,12 +90,11 @@ class Program : Game
         // Load textures, sounds, and so on in here...
         Content.RootDirectory = "Content";
         batch = new SpriteBatch(GraphicsDevice);
+        spriteFont = Content.Load<SpriteFont>("Arial");
 
         texture = Content.Load<Texture2D>("Teste");
 
-        //spriteRenderer = new SpriteRenderer(world, batch);
-
-        InterfaceManager.SetWorldAndSpriteBatch(world, batch);
+        InterfaceManager.SetWorldAndSpriteBatch(batch, spriteFont);
         ComponentUtilities.InsertTexture(texture);
         MouseInput.ConvertWindowWidth(Window.ClientBounds.Width, offSetMouseWidth, RenderWidth, camera.offsetX);
         MouseInput.ConvertWindowHeight(Window.ClientBounds.Height, RenderHeight, camera.offsetY);
@@ -124,6 +124,7 @@ class Program : Game
         {
             world.InsertObject();
             pause = false;
+            gameManager.ChangeGameLevel(1);
         }
 
         if (!pause)
@@ -143,7 +144,7 @@ class Program : Game
         // Render stuff in here. Do NOT run game logic in here!
         GraphicsDevice.SetRenderTarget(RenderTarget);
 
-        GraphicsDevice.Clear(Color.CornflowerBlue);
+        GraphicsDevice.Clear(Color.Black);
         InterfaceManager.DrawElements(texture);
 
         GraphicsDevice.SetRenderTarget(null);
@@ -156,6 +157,7 @@ class Program : Game
         var wDiff = Window.ClientBounds.Width - width;
         var hDiff = Window.ClientBounds.Height - height;
         batch.Draw(RenderTarget, new Rectangle((int)MathF.Floor(wDiff * 0.5f), (int)MathF.Floor(hDiff * 0.5f), width, height), null, Color.White);
+        //batch.DrawString(spriteFont, "Hello", new Vector2(0, 0), Color.White);
         batch.End();
 
         base.Draw(gameTime);
