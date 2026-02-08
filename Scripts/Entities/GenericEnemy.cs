@@ -16,6 +16,8 @@ namespace Joguinho.Scripts.Entities
 
         private float health = 3;
 
+        private int score = 10;
+
         public GenericEnemy(Vector2 newPosition) : base(newPosition)
         {
             
@@ -52,6 +54,7 @@ namespace Joguinho.Scripts.Entities
 
                 if (health <= 0)
                 {
+                    GameManager.GMInstance.score += score;
                     GameManager.GMInstance.DeleteObject(this);
                 }
             }

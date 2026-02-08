@@ -70,13 +70,15 @@ namespace Joguinho.Scripts.Graphics.Interface
 
             if (GameManager.GMInstance.gameLevel == 0)
             {
-                batch.DrawString(spriteFont, "Press \"L\" to start", new Vector2(120, 120), Color.White, 0, Vector2.One, 0.3f, SpriteEffects.None, 1); ;
+                batch.DrawString(spriteFont, "Press \"L\" to start", new Vector2(120, 120), Color.White, 0, Vector2.One, 0.3f, SpriteEffects.None, 1);
             }
 
             else if (GameManager.GMInstance.gameLevel == 1)
             {
                 for (int n = 0; n < sprites.Count; n++)
                 {
+                    batch.DrawString(spriteFont, ("Score: " + GameManager.GMInstance.score.ToString()), new Vector2(0, 0), Color.White, 0, Vector2.One, 0.3f, SpriteEffects.None, 1);
+
                     posX = (sprites[n].gameObject.GetPosition().X - sprites[n].GetSize().X / 2) - GameManager.GMInstance.world.camera.GetX() + GameManager.GMInstance.world.camera.offsetX;
                     posY = (sprites[n].gameObject.GetPosition().Y - sprites[n].GetSize().Y / 2) - GameManager.GMInstance.world.camera.GetY() + GameManager.GMInstance.world.camera.offsetY;
                     Rectangle rect = new Rectangle((int)sprites[n].GetSprite().X, (int)sprites[n].GetSprite().Y, (int)sprites[n].GetSize().X, (int)sprites[n].GetSize().Y);
@@ -88,6 +90,12 @@ namespace Joguinho.Scripts.Graphics.Interface
                     batch.Draw(texture, new Vector2(posX, posY), rect, Color.White, (float)sprites[n].gameObject.rotation, origin, 1f, SpriteEffects.None, 0);
                 }
             }
+
+            else if (GameManager.GMInstance.gameLevel == 2)
+            {
+
+            }
+            
             batch.End();
         }
 

@@ -19,6 +19,7 @@ namespace Joguinho.Scripts
         private List<Object> deleteList = new List<Object>();
 
         public int gameLevel = 0;
+        public int score = 0;
 
         public GameManager(World newWorld)
         {
