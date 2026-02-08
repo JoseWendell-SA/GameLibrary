@@ -21,10 +21,15 @@ namespace Joguinho.Scripts
 
         private int fireRate = 10;
         private int timeToNextShot = 0;
+        private float speed = 1.5f;
 
         private Rigidbody rigidbody;
 
         private Vector2 mov = new Vector2(0, 0);
+
+        private int health = 5;
+        private int invunerabilityTime = 60;
+        private int timeToNextHit = 0;
 
         public Player(Vector2 newPosition) : base(newPosition)
         {
@@ -104,7 +109,7 @@ namespace Joguinho.Scripts
                 timeToNextShot = num + fireRate;
             }
 
-            rigidbody.AddForce(mov);
+            rigidbody.AddForce(mov * speed);
             
             keyboardPrev = keyboardCur;
 
@@ -118,7 +123,16 @@ namespace Joguinho.Scripts
 
         public void OnCollisionEnter(Collider collider)
         {
+            if (collider.collisionTag.Contains(CollisionTag.Enemy))
+            {
+                if (num > timeToNextHit)
+                {
+                    health -= 1;
+                    timeToNextHit = num + invunerabilityTime;
 
+                    Console.WriteLine("You got hit!\nHealth: " + health);
+                }
+            }
         }
     }
 }
