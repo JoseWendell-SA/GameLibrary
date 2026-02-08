@@ -10,7 +10,7 @@ namespace Joguinho.Scripts.Entities
     public class GenericEnemy : Entity, IOnCollisionEnter
     {
         private Entity target;
-        private float speed;
+        private float speed = 1;
 
         private Rigidbody rigidbody;
 
