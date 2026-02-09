@@ -10,6 +10,8 @@ using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 using static System.Formats.Asn1.AsnWriter;
+using System.Text.Json;
+using System.IO;
 
 class Program : Game
 {
@@ -34,6 +36,9 @@ class Program : Game
     Camera camera;
     World world;
     GameManager gameManager;
+
+    double timerToWait = 0.3f;
+    double timerToNextDigit = 0;
 
     bool pause = true;
 
@@ -120,6 +125,8 @@ class Program : Game
         
         MouseInput.UpdateMouse();
 
+        Keys[] pressedKeys = keyboardCur.GetPressedKeys();
+
         if (keyboardCur.IsKeyDown(Keys.L) && keyboardPrev.IsKeyUp(Keys.L) && pause)
         {
             world.InsertObject();
@@ -131,6 +138,78 @@ class Program : Game
         {
             camera.Update();
             gameManager.Update(gameTime);
+        }
+
+        else if (gameManager.gameLevel == 2)
+        {
+            if (keyboardCur.IsKeyDown(Keys.Escape) && keyboardPrev.IsKeyUp(Keys.Escape))
+            {
+                gameManager.ChangeGameLevel(3);
+            }
+        }
+
+        else if (gameManager.gameLevel == 3)
+        {
+            if (gameTime.TotalGameTime.TotalSeconds > timerToNextDigit)
+            {
+                for (int n = 0; n < pressedKeys.Length; n++)
+                {
+                    if ((int)pressedKeys[n] >= 65 && (int)pressedKeys[n] <= 90)
+                    {
+                        if (gameManager.nameIndex == 3)
+                        {
+                            gameManager.ChangeGameLevel(4);
+
+                            String text = (gameManager.name[0] + "" + gameManager.name[1] + "" + gameManager.name[2] + ": ");
+                            FinalScore finalScore = new FinalScore();
+                            finalScore.name = text;
+                            finalScore.score = gameManager.score;
+                            Console.WriteLine(text);
+
+                            var option = new JsonSerializerOptions
+                            {
+                                WriteIndented = true
+                            };
+
+                            using FileStream openStream = File.OpenRead("Save/Scores.json");
+
+                            List<FinalScore> saveScore = new List<FinalScore>();
+                            saveScore = JsonSerializer.Deserialize<List<FinalScore>>(openStream);
+                            saveScore.Add(finalScore);
+                            for (int k = 0 ; k < saveScore.Count ; k++)
+                            {
+                                int maior = k;
+
+                                for (int m = k+1; m < saveScore.Count; m++)
+                                {
+                                    if (saveScore[m].score > saveScore[maior].score)
+                                    {
+                                        maior = m;
+                                        Console.WriteLine(saveScore[maior].score);
+                                    }
+                                }
+
+                                FinalScore aux = saveScore[k];
+                                saveScore[k] = saveScore[maior];
+                                saveScore[maior] = aux;
+                            }
+                            var saveFile = JsonSerializer.Serialize<List<FinalScore>>(saveScore, option);
+                            gameManager.SetAllScores(saveScore);
+                            openStream.Close();
+                            File.WriteAllText("Save/Scores.json", saveFile);
+                        }
+
+                        if (gameManager.nameIndex < 3)
+                        {
+                            gameManager.name[gameManager.nameIndex] = (char)pressedKeys[n];
+                            gameManager.nameIndex += 1;
+                        }
+                        Console.WriteLine(gameManager.name);
+                    }
+                }
+
+                timerToNextDigit = gameTime.TotalGameTime.TotalSeconds + timerToWait;
+            }
         }
 
         mousePrev = mouseCur;

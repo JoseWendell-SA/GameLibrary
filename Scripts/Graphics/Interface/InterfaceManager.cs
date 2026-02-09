@@ -1,9 +1,10 @@
 ﻿using Joguinho.Scripts.Graphics;
-using System;
-using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System;
+using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Joguinho.Scripts.Graphics.Interface
 {
@@ -93,10 +94,26 @@ namespace Joguinho.Scripts.Graphics.Interface
 
             else if (GameManager.GMInstance.gameLevel == 2)
             {
-                batch.DrawString(spriteFont, "You Died! Press \"L\" to continue", new Vector2(120, 110), Color.White, 0, Vector2.One, 0.3f, SpriteEffects.None, 1);
+                batch.DrawString(spriteFont, "You Died!\nFinal Score: " + GameManager.GMInstance.score + "\nPress \"Esc\" to continue", new Vector2(120, 110), Color.White, 0, Vector2.One, 0.3f, SpriteEffects.None, 1);
             }
-            
-            batch.End();
+
+            else if (GameManager.GMInstance.gameLevel == 3)
+            {
+                char[] name = GameManager.GMInstance.name;
+                String text = ("Name: " + name[0] + name[1] + name[2]);
+                batch.DrawString(spriteFont, (text + "\nScore: " + GameManager.GMInstance.score), new Vector2(120, 110), Color.White, 0, Vector2.One, 0.3f, SpriteEffects.None, 1);
+            }
+
+            else if (GameManager.GMInstance.gameLevel == 4)
+            {
+                List<FinalScore> scores = GameManager.GMInstance.GetAllScores();
+                for (int n = 0; n < scores.Count; n++)
+                {
+                    batch.DrawString(spriteFont, (scores[n].name + scores[n].score.ToString()), new Vector2(110, 0 + (12*n)), Color.White, 0, Vector2.One, 0.3f, SpriteEffects.None, 1);
+                }
+            }
+
+                batch.End();
         }
 
         public static void SetWorldAndSpriteBatch(SpriteBatch newBatch, SpriteFont newFont)

@@ -20,9 +20,13 @@ namespace Joguinho.Scripts
 
         private List<Object> deleteList = new List<Object>();
 
+        private List<FinalScore> allScores;
+
         public int gameLevel {get; private set;} = 0;
         public int difficultyLevel = 1;
         public int score = 0;
+        public char[] name = [' ', ' ', ' '];
+        public int nameIndex = 0;
 
         public GameManager(World newWorld)
         {
@@ -154,6 +158,16 @@ namespace Joguinho.Scripts
             }
 
             return null;
+        }
+
+        public void SetAllScores(List<FinalScore> loadedScores)
+        {
+            allScores = loadedScores;
+        }
+
+        public List<FinalScore> GetAllScores()
+        {
+            return allScores;
         }
 
         public void ChangeGameLevel(int newLevel)

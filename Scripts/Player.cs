@@ -31,7 +31,7 @@ namespace Joguinho.Scripts
         private int level = 1;
         private int currentXp = 0;
         private int xpRequired;
-        private int health = 5;
+        private int health = 1;
         private int invunerabilityTime = 60;
         private float timeToNextHit = 0;
 
