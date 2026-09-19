@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 
-namespace Joguinho.Scripts
+namespace GameLIB.Scripts
 {
     public class Tile : Object
     {

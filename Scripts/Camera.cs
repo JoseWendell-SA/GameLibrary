@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
-using Joguinho.Scripts.GameComponents.Graphics;
-using Joguinho.Scripts.GameComponents.Physics;
+using GameLIB.Scripts.GameComponents.Graphics;
+using GameLIB.Scripts.GameComponents.Physics;
 
-namespace Joguinho.Scripts
+namespace GameLIB.Scripts
 {
     public class Camera
     {

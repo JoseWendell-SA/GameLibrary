@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Joguinho.Scripts.GameComponents;
-using Joguinho.Scripts.GameComponents.Physics;
-using Joguinho.Scripts.GameComponents.Physics.Collision;
+using GameLIB.Scripts.GameComponents;
+using GameLIB.Scripts.GameComponents.Physics;
+using GameLIB.Scripts.GameComponents.Physics.Collision;
 
-namespace Joguinho.Scripts.System
+namespace GameLIB.Scripts.System
 {
     public class BaseSystem<T> where T : ObjectComponent
     {

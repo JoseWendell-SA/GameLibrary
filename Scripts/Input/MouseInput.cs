@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 
-namespace Joguinho.Scripts.Input
+namespace GameLIB.Scripts.Input
 {
     public static class MouseInput
     {

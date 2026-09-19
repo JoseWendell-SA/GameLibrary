@@ -1,7 +1,7 @@
-﻿using Joguinho.Scripts.System;
+﻿using GameLIB.Scripts.System;
 using Microsoft.Xna.Framework;
 
-namespace Joguinho.Scripts.GameComponents.Physics.Collision
+namespace GameLIB.Scripts.GameComponents.Physics.Collision
 {
     public class CircleCollider : Collider
     {

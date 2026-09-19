@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using Joguinho.Scripts.GameComponents.Physics;
+using GameLIB.Scripts.GameComponents.Physics;
 using Microsoft.Xna.Framework;
-using Joguinho.Scripts.GameComponents.Physics.Interface;
-using Joguinho.Scripts.GameComponents.Physics.Collision;
+using GameLIB.Scripts.GameComponents.Physics.Interface;
+using GameLIB.Scripts.GameComponents.Physics.Collision;
 
-namespace Joguinho.Scripts
+namespace GameLIB.Scripts
 {
     public class Projectile : Object, IOnCollisionEnter
     {

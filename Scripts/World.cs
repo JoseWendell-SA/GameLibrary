@@ -1,17 +1,17 @@
-﻿using Joguinho.Scripts.GameComponents.Graphics;
+﻿using GameLIB.Scripts.GameComponents.Graphics;
 using System;
 using System.Collections.Generic;
-using Joguinho.Scripts.GameComponents.Physics.Collision;
+using GameLIB.Scripts.GameComponents.Physics.Collision;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Joguinho.Scripts.Interface;
-using Joguinho.Scripts.GameComponents;
-using Joguinho.Scripts.GameComponents.Physics;
+using GameLIB.Scripts.Interface;
+using GameLIB.Scripts.GameComponents;
+using GameLIB.Scripts.GameComponents.Physics;
 
 //Test, delete later
-using Joguinho.Scripts.Entities;
+using GameLIB.Scripts.Entities;
 
-namespace Joguinho.Scripts
+namespace GameLIB.Scripts
 {
     public class World
     {
@@ -88,7 +88,7 @@ namespace Joguinho.Scripts
 
         public void InsertObject()
         {
-            //ComponentUtilities.AddSprite(entities[0], 35, 16, 16, 2);
+            ComponentUtilities.AddSprite(entities[0], 35, 16, 16, 2);
 
             /*for (int y = 0; y < testMap.Length; y++)
             {

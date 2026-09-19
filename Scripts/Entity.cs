@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
-using Joguinho.Scripts.GameComponents.Physics.Collision;
+using GameLIB.Scripts.GameComponents.Physics.Collision;
 
-namespace Joguinho.Scripts
+namespace GameLIB.Scripts
 {
     public class Entity : Object
     {

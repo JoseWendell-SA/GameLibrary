@@ -1,4 +1,4 @@
-﻿using Joguinho.Scripts.GameComponents.Graphics;
+﻿using GameLIB.Scripts.GameComponents.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using static System.Net.Mime.MediaTypeNames;
 
-namespace Joguinho.Scripts.Interface
+namespace GameLIB.Scripts.Interface
 {
     public static class InterfaceManager
     {

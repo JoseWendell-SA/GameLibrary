@@ -1,11 +1,11 @@
-﻿using Joguinho.Scripts.Entities;
+﻿using GameLIB.Scripts.Entities;
 using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
-using Joguinho.Scripts.GameComponents;
-using Joguinho.Scripts.GameComponents.Physics.Collision;
+using GameLIB.Scripts.GameComponents;
+using GameLIB.Scripts.GameComponents.Physics.Collision;
 
-namespace Joguinho.Scripts.EventSystem
+namespace GameLIB.Scripts.EventSystem
 {
     public class EnemyGeneratorSystem
     {

@@ -33,9 +33,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\aki_e\\OneDrive\\Documentos\\El Juego\\GameDevelopment\\Joguinho.csproj",
-      "projectName": "Joguinho",
-      "projectPath": "C:\\Users\\aki_e\\OneDrive\\Documentos\\El Juego\\GameDevelopment\\Joguinho.csproj",
+      "projectUniqueName": "C:\\Users\\aki_e\\OneDrive\\Documentos\\El Juego\\GameDevelopment\\GameLIB.csproj",
+      "projectName": "GameLIB",
+      "projectPath": "C:\\Users\\aki_e\\OneDrive\\Documentos\\El Juego\\GameDevelopment\\GameLIB.csproj",
       "packagesPath": "C:\\Users\\aki_e\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\aki_e\\OneDrive\\Documentos\\El Juego\\GameDevelopment\\obj\\",
       "projectStyle": "PackageReference",

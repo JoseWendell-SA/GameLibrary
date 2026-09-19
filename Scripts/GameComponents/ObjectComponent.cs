@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Joguinho.Scripts.GameComponents
+namespace GameLIB.Scripts.GameComponents
 {
     public class ObjectComponent
     {

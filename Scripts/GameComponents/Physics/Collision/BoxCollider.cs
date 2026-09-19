@@ -1,8 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
-using Joguinho.Scripts.GameComponents.Physics.Interface;
-using Joguinho.Scripts.System;
+using GameLIB.Scripts.GameComponents.Physics.Interface;
+using GameLIB.Scripts.System;
 
-namespace Joguinho.Scripts.GameComponents.Physics.Collision
+namespace GameLIB.Scripts.GameComponents.Physics.Collision
 {
     public class BoxCollider : Collider
     {

@@ -1,10 +1,10 @@
-﻿using Joguinho.Scripts.GameComponents;
+﻿using GameLIB.Scripts.GameComponents;
 using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
-using Joguinho.Scripts.Interface;
+using GameLIB.Scripts.Interface;
 
-namespace Joguinho.Scripts.GameComponents.Graphics
+namespace GameLIB.Scripts.GameComponents.Graphics
 {
     public class Sprite : ObjectComponent
     {

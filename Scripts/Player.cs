@@ -1,15 +1,15 @@
-﻿using Joguinho.Scripts.GameComponents.Physics;
-using Joguinho.Scripts.GameComponents.Physics.Collision;
-using Joguinho.Scripts.GameComponents.Physics.Interface;
-using Joguinho.Scripts.GameComponents.Graphics;
-using Joguinho.Scripts.Input;
+﻿using GameLIB.Scripts.GameComponents.Physics;
+using GameLIB.Scripts.GameComponents.Physics.Collision;
+using GameLIB.Scripts.GameComponents.Physics.Interface;
+using GameLIB.Scripts.GameComponents.Graphics;
+using GameLIB.Scripts.Input;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 using System.Net.Security;
 
-namespace Joguinho.Scripts
+namespace GameLIB.Scripts
 {
     public class Player : Entity, IOnCollisionEnter
     {

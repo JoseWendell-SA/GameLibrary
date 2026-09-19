@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 
-namespace Joguinho.Scripts.GameComponents.Physics
+namespace GameLIB.Scripts.GameComponents.Physics
 {
     public class Transform
     {

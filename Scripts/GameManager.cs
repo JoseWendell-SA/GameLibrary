@@ -1,13 +1,13 @@
-﻿using Joguinho.Scripts.Entities;
-using Joguinho.Scripts.GameComponents;
-using Joguinho.Scripts.GameComponents.Physics.Collision;
+﻿using GameLIB.Scripts.Entities;
+using GameLIB.Scripts.GameComponents;
+using GameLIB.Scripts.GameComponents.Physics.Collision;
 using System;
 using System.Collections.Generic;
 
 using Microsoft.Xna.Framework;
-using Joguinho.Scripts.EventSystem;
+using GameLIB.Scripts.EventSystem;
 
-namespace Joguinho.Scripts
+namespace GameLIB.Scripts
 {
     public class GameManager
     {

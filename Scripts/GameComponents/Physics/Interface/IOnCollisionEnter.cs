@@ -1,8 +1,8 @@
-﻿using Joguinho.Scripts.GameComponents.Physics.Collision;
+﻿using GameLIB.Scripts.GameComponents.Physics.Collision;
 using System;
 using System.Collections.Generic;
 
-namespace Joguinho.Scripts.GameComponents.Physics.Interface
+namespace GameLIB.Scripts.GameComponents.Physics.Interface
 {
     interface IOnCollisionEnter
     {

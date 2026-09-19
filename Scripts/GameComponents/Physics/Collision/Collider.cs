@@ -1,10 +1,10 @@
-﻿using Joguinho.Scripts.GameComponents;
-using Joguinho.Scripts.GameComponents.Physics.Interface;
+﻿using GameLIB.Scripts.GameComponents;
+using GameLIB.Scripts.GameComponents.Physics.Interface;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 
-namespace Joguinho.Scripts.GameComponents.Physics.Collision
+namespace GameLIB.Scripts.GameComponents.Physics.Collision
 {
     public class Collider : ObjectComponent
     {

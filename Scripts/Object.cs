@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using Joguinho.Scripts.GameComponents;
-using Joguinho.Scripts.GameComponents.Physics;
-using Joguinho.Scripts.GameComponents.Physics.Collision;
+using GameLIB.Scripts.GameComponents;
+using GameLIB.Scripts.GameComponents.Physics;
+using GameLIB.Scripts.GameComponents.Physics.Collision;
 using Microsoft.Xna.Framework;
 
-namespace Joguinho.Scripts
+namespace GameLIB.Scripts
 {
     public class Object
     {

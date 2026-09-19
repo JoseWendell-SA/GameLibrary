@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using Joguinho.Scripts.GameComponents;
-using Joguinho.Scripts.GameComponents.Physics.Collision;
-using Joguinho.Scripts.Interface;
-using Joguinho.Scripts;
+using GameLIB.Scripts.GameComponents;
+using GameLIB.Scripts.GameComponents.Physics.Collision;
+using GameLIB.Scripts.Interface;
+using GameLIB.Scripts;
 using Microsoft.Xna.Framework;
-using Joguinho.Scripts.System;
+using GameLIB.Scripts.System;
 
-namespace Joguinho.Scripts.GameComponents.Physics
+namespace GameLIB.Scripts.GameComponents.Physics
 {
     public class Rigidbody : ObjectComponent
     {

@@ -1,11 +1,11 @@
-﻿using Joguinho.Scripts.GameComponents.Physics;
-using Joguinho.Scripts.GameComponents.Physics.Collision;
-using Joguinho.Scripts.GameComponents.Physics.Interface;
+﻿using GameLIB.Scripts.GameComponents.Physics;
+using GameLIB.Scripts.GameComponents.Physics.Collision;
+using GameLIB.Scripts.GameComponents.Physics.Interface;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 
-namespace Joguinho.Scripts.Entities
+namespace GameLIB.Scripts.Entities
 {
     public class GenericEnemy : Entity, IOnCollisionEnter
     {

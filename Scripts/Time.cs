@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Joguinho.Scripts
+namespace GameLIB.Scripts
 {
     public static class Time
     {

@@ -1,9 +1,8 @@
-﻿using Joguinho.Scripts;
-using Joguinho.Scripts.GameComponents;
-using Joguinho.Scripts.GameComponents.Physics.Collision;
-using Joguinho.Scripts.GameComponents.Graphics;
-using Joguinho.Scripts.Input;
-using Joguinho.Scripts;
+﻿using GameLIB.Scripts;
+using GameLIB.Scripts.GameComponents;
+using GameLIB.Scripts.GameComponents.Physics.Collision;
+using GameLIB.Scripts.GameComponents.Graphics;
+using GameLIB.Scripts.Input;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -12,8 +11,8 @@ using System.Collections.Generic;
 using static System.Formats.Asn1.AsnWriter;
 using System.Text.Json;
 using System.IO;
-using Joguinho.Scripts.Interface;
-using Joguinho.Scripts.System;
+using GameLIB.Scripts.Interface;
+using GameLIB.Scripts.System;
 
 class Program : Game
 {

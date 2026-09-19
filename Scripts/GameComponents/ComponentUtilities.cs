@@ -1,12 +1,12 @@
-﻿using Joguinho.Scripts.GameComponents.Graphics;
-using Joguinho.Scripts.GameComponents.Physics.Collision;
-using Joguinho.Scripts.Interface;
+﻿using GameLIB.Scripts.GameComponents.Graphics;
+using GameLIB.Scripts.GameComponents.Physics.Collision;
+using GameLIB.Scripts.Interface;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 
-namespace Joguinho.Scripts.GameComponents
+namespace GameLIB.Scripts.GameComponents
 {
     public static class ComponentUtilities
     {
