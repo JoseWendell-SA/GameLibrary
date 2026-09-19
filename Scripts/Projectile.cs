@@ -11,7 +11,7 @@ namespace Joguinho.Scripts
     {
         private Player origin;
 
-        private float speed = 2.5f;
+        private float speed = 5f;
 
         private Rigidbody rigidbody;
 
@@ -31,7 +31,7 @@ namespace Joguinho.Scripts
 
             Vector2 mov = new Vector2(MathF.Cos(rotation), MathF.Sin(rotation));
 
-            rigidbody.AddForce(mov * speed);
+            rigidbody.AddForce(mov * speed * Time.deltaTime);
 
             for (int n = 0; n < components.Count; n++)
             {

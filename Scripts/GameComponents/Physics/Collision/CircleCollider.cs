@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Joguinho.Scripts.System;
+using Microsoft.Xna.Framework;
 
 namespace Joguinho.Scripts.GameComponents.Physics.Collision
 {
@@ -6,7 +7,7 @@ namespace Joguinho.Scripts.GameComponents.Physics.Collision
     {
         public CircleCollider(Object newGameObject) : base(newGameObject)
         {
-            
+            CollisionSystem.Register(this);
         }
 
         public float radius;

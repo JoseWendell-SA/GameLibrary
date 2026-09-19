@@ -1,4 +1,4 @@
-﻿using Joguinho.Scripts.Graphics;
+﻿using Joguinho.Scripts.GameComponents.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using static System.Net.Mime.MediaTypeNames;
 
-namespace Joguinho.Scripts.Graphics.Interface
+namespace Joguinho.Scripts.Interface
 {
     public static class InterfaceManager
     {
@@ -80,9 +80,13 @@ namespace Joguinho.Scripts.Graphics.Interface
                 {
                     batch.DrawString(spriteFont, ("Score: " + GameManager.GMInstance.score.ToString()), new Vector2(0, 0), Color.White, 0, Vector2.One, 0.3f, SpriteEffects.None, 1);
 
-                    posX = (sprites[n].gameObject.GetPosition().X - sprites[n].GetSize().X / 2) - GameManager.GMInstance.world.camera.GetX() + GameManager.GMInstance.world.camera.offsetX;
-                    posY = (sprites[n].gameObject.GetPosition().Y - sprites[n].GetSize().Y / 2) - GameManager.GMInstance.world.camera.GetY() + GameManager.GMInstance.world.camera.offsetY;
-                    Rectangle rect = new Rectangle((int)sprites[n].GetSprite().X, (int)sprites[n].GetSprite().Y, (int)sprites[n].GetSize().X, (int)sprites[n].GetSize().Y);
+                    posX = sprites[n].GetSpritePositionInInterface().X - GameManager.GMInstance.world.camera.GetCameraPosition().X;
+                    posY = sprites[n].GetSpritePositionInInterface().Y - GameManager.GMInstance.world.camera.GetCameraPosition().Y;
+
+                    Vector2 spriteRect = sprites[n].GetRect();
+                    Vector2 spriteRectSize = sprites[n].GetRectSize();
+
+                    Rectangle rect = new Rectangle((int)spriteRect.X, (int)spriteRect.Y, (int)spriteRectSize.X, (int)spriteRectSize.Y);
                     Vector2 origin = new Vector2(rect.Width / 2, rect.Height / 2);
                     if (n == 1)
                     {

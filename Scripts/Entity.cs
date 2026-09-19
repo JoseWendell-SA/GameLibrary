@@ -14,10 +14,7 @@ namespace Joguinho.Scripts
 
         public override void Update()
         {
-            for (int n = 0; n < components.Count; n++)
-            {
-                components[n].Update();
-            }
+            
         }
 
         public virtual void Move()

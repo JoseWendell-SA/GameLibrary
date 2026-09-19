@@ -11,6 +11,7 @@ namespace Joguinho.Scripts.GameComponents.Physics.Collision
         public Vector2 localPosition;
 
         public List<CollisionTag> collisionTag { get; private set; } = new List<CollisionTag>();
+        public float restitution = 0;
 
         public Collider(Object newGameObject) : base(newGameObject)
         {

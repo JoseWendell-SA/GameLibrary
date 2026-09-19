@@ -1,9 +1,9 @@
 ﻿using Joguinho.Scripts;
 using Joguinho.Scripts.GameComponents;
 using Joguinho.Scripts.GameComponents.Physics.Collision;
-using Joguinho.Scripts.Graphics;
-using Joguinho.Scripts.Graphics.Interface;
+using Joguinho.Scripts.GameComponents.Graphics;
 using Joguinho.Scripts.Input;
+using Joguinho.Scripts;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -12,6 +12,8 @@ using System.Collections.Generic;
 using static System.Formats.Asn1.AsnWriter;
 using System.Text.Json;
 using System.IO;
+using Joguinho.Scripts.Interface;
+using Joguinho.Scripts.System;
 
 class Program : Game
 {
@@ -31,14 +33,13 @@ class Program : Game
 
     private MouseState mousePrev = new MouseState();
     private MouseState mouseCur;
-
     Player player;
     Camera camera;
     World world;
     GameManager gameManager;
 
-    double timerToWait = 0.3f;
-    double timerToNextDigit = 0;
+    RigidbodySystem rigidbodySystem = new RigidbodySystem();
+    CollisionSystem collisionSystem = new CollisionSystem();
 
     bool pause = true;
 
@@ -48,8 +49,8 @@ class Program : Game
 
     KeyboardState keyboardPrev;
 
-    int offSetMouseWidth = 0;
-    int offSetMouseHeight = 0;
+    int offsetMouseWidth = 0;
+    int offsetMouseHeight = 0;
 
     public static Vector2 mousePosition = new Vector2();
 
@@ -84,8 +85,10 @@ class Program : Game
         var width = (int)MathF.Floor(height * AspectRatio);
         var wDiff = Window.ClientBounds.Width - width;
         var hDiff = Window.ClientBounds.Height - height;
-        offSetMouseWidth = (int)MathF.Floor(wDiff * 0.5f);
-        offSetMouseHeight = (int)MathF.Floor(hDiff * 0.5f);
+        offsetMouseWidth = (int)MathF.Floor(wDiff * 0.5f);
+        offsetMouseHeight = (int)MathF.Floor(hDiff * 0.5f);
+        MouseInput.ConvertWindowWidth(Window.ClientBounds.Width, offsetMouseWidth, RenderWidth, camera.offsetX);
+        MouseInput.ConvertWindowHeight(Window.ClientBounds.Height, offsetMouseHeight, RenderHeight, camera.offsetY);
     }
 
     protected override void LoadContent()
@@ -101,8 +104,6 @@ class Program : Game
 
         InterfaceManager.SetWorldAndSpriteBatch(batch, spriteFont);
         ComponentUtilities.InsertTexture(texture);
-        MouseInput.ConvertWindowWidth(Window.ClientBounds.Width, offSetMouseWidth, RenderWidth, camera.offsetX);
-        MouseInput.ConvertWindowHeight(Window.ClientBounds.Height, RenderHeight, camera.offsetY);
 
         base.LoadContent();
     }
@@ -118,9 +119,13 @@ class Program : Game
     protected override void Update(GameTime gameTime)
     {
         // Run game logic in here. Do NOT render anything here!
+        Time.UpdateGameTime(gameTime);
         mouseCur = Mouse.GetState();
         KeyboardState keyboardCur = Keyboard.GetState();
         GamePadState gpCur = GamePad.GetState(PlayerIndex.One);
+
+        rigidbodySystem.Update();
+        collisionSystem.Update();
 
         
         MouseInput.UpdateMouse();
@@ -136,80 +141,8 @@ class Program : Game
 
         if (gameManager.gameLevel == 1)
         {
-            camera.Update();
             gameManager.Update(gameTime);
-        }
-
-        else if (gameManager.gameLevel == 2)
-        {
-            if (keyboardCur.IsKeyDown(Keys.Escape) && keyboardPrev.IsKeyUp(Keys.Escape))
-            {
-                gameManager.ChangeGameLevel(3);
-            }
-        }
-
-        else if (gameManager.gameLevel == 3)
-        {
-            if (gameTime.TotalGameTime.TotalSeconds > timerToNextDigit)
-            {
-                for (int n = 0; n < pressedKeys.Length; n++)
-                {
-                    if ((int)pressedKeys[n] >= 65 && (int)pressedKeys[n] <= 90)
-                    {
-                        if (gameManager.nameIndex == 3)
-                        {
-                            gameManager.ChangeGameLevel(4);
-
-                            String text = (gameManager.name[0] + "" + gameManager.name[1] + "" + gameManager.name[2] + ": ");
-                            FinalScore finalScore = new FinalScore();
-                            finalScore.name = text;
-                            finalScore.score = gameManager.score;
-                            Console.WriteLine(text);
-
-                            var option = new JsonSerializerOptions
-                            {
-                                WriteIndented = true
-                            };
-
-                            using FileStream openStream = File.OpenRead("Save/Scores.json");
-
-                            List<FinalScore> saveScore = new List<FinalScore>();
-                            saveScore = JsonSerializer.Deserialize<List<FinalScore>>(openStream);
-                            saveScore.Add(finalScore);
-                            for (int k = 0 ; k < saveScore.Count ; k++)
-                            {
-                                int maior = k;
-
-                                for (int m = k+1; m < saveScore.Count; m++)
-                                {
-                                    if (saveScore[m].score > saveScore[maior].score)
-                                    {
-                                        maior = m;
-                                        Console.WriteLine(saveScore[maior].score);
-                                    }
-                                }
-
-                                FinalScore aux = saveScore[k];
-                                saveScore[k] = saveScore[maior];
-                                saveScore[maior] = aux;
-                            }
-                            var saveFile = JsonSerializer.Serialize<List<FinalScore>>(saveScore, option);
-                            gameManager.SetAllScores(saveScore);
-                            openStream.Close();
-                            File.WriteAllText("Save/Scores.json", saveFile);
-                        }
-
-                        if (gameManager.nameIndex < 3)
-                        {
-                            gameManager.name[gameManager.nameIndex] = (char)pressedKeys[n];
-                            gameManager.nameIndex += 1;
-                        }
-                        Console.WriteLine(gameManager.name);
-                    }
-                }
-
-                timerToNextDigit = gameTime.TotalGameTime.TotalSeconds + timerToWait;
-            }
+            camera.Update();
         }
 
         mousePrev = mouseCur;

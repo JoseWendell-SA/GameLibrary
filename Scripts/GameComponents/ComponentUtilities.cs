@@ -1,6 +1,6 @@
-﻿using Joguinho.Scripts.GameComponents.Physics.Collision;
-using Joguinho.Scripts.Graphics;
-using Joguinho.Scripts.Graphics.Interface;
+﻿using Joguinho.Scripts.GameComponents.Graphics;
+using Joguinho.Scripts.GameComponents.Physics.Collision;
+using Joguinho.Scripts.Interface;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -17,8 +17,7 @@ namespace Joguinho.Scripts.GameComponents
             int posX = (spriteID % (texture.Width / sizeX)) * sizeX;
             int posY = (spriteID / (texture.Width / sizeX)) * sizeY;
 
-            gameObject.AddComponent<Sprite>();
-            Sprite sprite = gameObject.GetComponent<Sprite>();
+            Sprite sprite = gameObject.AddComponent<Sprite>();
             sprite.SetSprite(posX, posY);
             sprite.SetSize(sizeX, sizeY);
             sprite.SetLayer(layer);
@@ -28,18 +27,25 @@ namespace Joguinho.Scripts.GameComponents
 
         public static void AddBoxCollider(Object gameObject, int sizeX, int sizeY, List<CollisionTag> collisionTags)
         {
-            gameObject.AddComponent<BoxCollider>();
-            BoxCollider boxCollider = gameObject.GetComponent<BoxCollider>();
-            boxCollider.SetNewBoxSize(new Vector2(sizeX, sizeY));
-            boxCollider.SetNewCollisionTag(collisionTags);
+            BoxCollider boxCollider = gameObject.AddComponent<BoxCollider>();
 
-            GameManager.GMInstance.InsertNewBoxCollider(boxCollider);
+            try
+            {
+                boxCollider.SetNewBoxSize(new Vector2(sizeX, sizeY));
+                boxCollider.SetNewCollisionTag(collisionTags);
+
+                GameManager.GMInstance.InsertNewBoxCollider(boxCollider);
+            }
+
+            catch (Exception e)
+            {
+                Console.WriteLine("Exception after adding Box Collider: " + e);
+            }
         }
 
         public static void AddTileCollider(Object tile, int sizeX, int sizeY)
         {
-            tile.AddComponent<BoxCollider>();
-            BoxCollider boxCollider = tile.GetComponent<BoxCollider>();
+            BoxCollider boxCollider = tile.AddComponent<BoxCollider>();
             boxCollider.SetNewBoxSize(new Vector2(sizeX, sizeY));
 
             List<CollisionTag> collisionTag = [CollisionTag.Terrain];

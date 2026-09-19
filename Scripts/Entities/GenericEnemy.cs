@@ -27,21 +27,21 @@ namespace Joguinho.Scripts.Entities
         public override void StartObject()
         {
             target = GameManager.GMInstance.GetEntityByCollisionTag(CollisionTag.Player);
-            AddComponent<Rigidbody>();
-            rigidbody = GetComponent<Rigidbody>();
+            rigidbody = AddComponent<Rigidbody>();
         }
 
         public override void Update()
         {
             if (target != null)
             {
-                Vector2 direction = GameUtilities.DiffBetweenA_B(target.GetPosition(), position);
+                Vector2 direction = GameUtilities.DiffBetweenA_B(target.transform.position, transform.position);
                 float angle = (float)(Math.Atan2(direction.Y, direction.X));
                 rotation = angle;
 
                 Vector2 mov = new Vector2(MathF.Cos(rotation), MathF.Sin(rotation));
 
-                rigidbody.AddForce(mov * speed);
+                //rigidbody.AddForce(mov * speed * Time.deltaTime);
+                rigidbody.velocity = mov * speed * Time.deltaTime;
             }
 
             base.Update();
@@ -53,7 +53,8 @@ namespace Joguinho.Scripts.Entities
             enemyType = num;
             score = score * enemyType + GameManager.GMInstance.difficultyLevel * 2;
 
-            speed = speed + (((float)num-1)/3) + (GameManager.GMInstance.difficultyLevel-1)/10;
+            //speed = speed + (((float)num-1)/3) + (GameManager.GMInstance.difficultyLevel-1)/10;
+            speed = 45f;
         }
 
         public void OnCollisionEnter(Collider collider)

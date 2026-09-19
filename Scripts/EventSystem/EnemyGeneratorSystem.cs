@@ -11,7 +11,7 @@ namespace Joguinho.Scripts.EventSystem
     {
         Random random = new Random();
 
-        private int enemyLimit = 10;
+        private int enemyLimit = 0;
 
         Entity target;
 
@@ -42,9 +42,9 @@ namespace Joguinho.Scripts.EventSystem
                 }
 
                     Console.WriteLine("PosX: " + posX + " - PosY: " + posY);
-                Console.WriteLine("X: " + (posX + target.GetPosition().X) + " - Y: " + (posY + target.GetPosition().Y));
+                Console.WriteLine("X: " + (posX + target.transform.position.X) + " - Y: " + (posY + target.transform.position.Y));
 
-                GenericEnemy newEnemy = new GenericEnemy(new Vector2(posX + target.GetPosition().X, posY + target.GetPosition().Y));
+                GenericEnemy newEnemy = new GenericEnemy(new Vector2(posX + target.transform.position.X, posY + target.transform.position.Y));
                 List<CollisionTag> collisionTag = [CollisionTag.Enemy];
                 ComponentUtilities.AddBoxCollider(newEnemy, 12, 12, collisionTag);
 

@@ -20,3 +20,26 @@ C:\Users\Wendell\source\repos\Joguinho\obj\Debug\net8.0\refint\Joguinho.dll
 C:\Users\Wendell\source\repos\Joguinho\obj\Debug\net8.0\Joguinho.pdb
 C:\Users\Wendell\source\repos\Joguinho\obj\Debug\net8.0\Joguinho.genruntimeconfig.cache
 C:\Users\Wendell\source\repos\Joguinho\obj\Debug\net8.0\ref\Joguinho.dll
+C:\Users\aki_e\OneDrive\Documentos\El Juego\GameDevelopment\bin\Debug\net8.0\FAudio.dll
+C:\Users\aki_e\OneDrive\Documentos\El Juego\GameDevelopment\bin\Debug\net8.0\FNA3D.dll
+C:\Users\aki_e\OneDrive\Documentos\El Juego\GameDevelopment\bin\Debug\net8.0\libtheorafile.dll
+C:\Users\aki_e\OneDrive\Documentos\El Juego\GameDevelopment\bin\Debug\net8.0\SDL3.dll
+C:\Users\aki_e\OneDrive\Documentos\El Juego\GameDevelopment\bin\Debug\net8.0\Joguinho.exe
+C:\Users\aki_e\OneDrive\Documentos\El Juego\GameDevelopment\bin\Debug\net8.0\Joguinho.dll.config
+C:\Users\aki_e\OneDrive\Documentos\El Juego\GameDevelopment\bin\Debug\net8.0\Joguinho.deps.json
+C:\Users\aki_e\OneDrive\Documentos\El Juego\GameDevelopment\bin\Debug\net8.0\Joguinho.runtimeconfig.json
+C:\Users\aki_e\OneDrive\Documentos\El Juego\GameDevelopment\bin\Debug\net8.0\Joguinho.dll
+C:\Users\aki_e\OneDrive\Documentos\El Juego\GameDevelopment\bin\Debug\net8.0\Joguinho.pdb
+C:\Users\aki_e\OneDrive\Documentos\El Juego\GameDevelopment\bin\Debug\net8.0\FNA.dll
+C:\Users\aki_e\OneDrive\Documentos\El Juego\GameDevelopment\bin\Debug\net8.0\FNA.pdb
+C:\Users\aki_e\OneDrive\Documentos\El Juego\GameDevelopment\bin\Debug\net8.0\FNA.dll.config
+C:\Users\aki_e\OneDrive\Documentos\El Juego\GameDevelopment\obj\Debug\net8.0\Joguinho.csproj.AssemblyReference.cache
+C:\Users\aki_e\OneDrive\Documentos\El Juego\GameDevelopment\obj\Debug\net8.0\Joguinho.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\aki_e\OneDrive\Documentos\El Juego\GameDevelopment\obj\Debug\net8.0\Joguinho.csproj.CoreCompileInputs.cache
+C:\Users\aki_e\OneDrive\Documentos\El Juego\GameDevelopment\obj\Debug\net8.0\Joguinho.sourcelink.json
+C:\Users\aki_e\OneDrive\Documentos\El Juego\GameDevelopment\obj\Debug\net8.0\Joguinho.csproj.Up2Date
+C:\Users\aki_e\OneDrive\Documentos\El Juego\GameDevelopment\obj\Debug\net8.0\Joguinho.dll
+C:\Users\aki_e\OneDrive\Documentos\El Juego\GameDevelopment\obj\Debug\net8.0\refint\Joguinho.dll
+C:\Users\aki_e\OneDrive\Documentos\El Juego\GameDevelopment\obj\Debug\net8.0\Joguinho.pdb
+C:\Users\aki_e\OneDrive\Documentos\El Juego\GameDevelopment\obj\Debug\net8.0\Joguinho.genruntimeconfig.cache
+C:\Users\aki_e\OneDrive\Documentos\El Juego\GameDevelopment\obj\Debug\net8.0\ref\Joguinho.dll

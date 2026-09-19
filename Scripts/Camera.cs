@@ -1,13 +1,14 @@
-﻿using Joguinho.Scripts.Graphics;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
+using Joguinho.Scripts.GameComponents.Graphics;
+using Joguinho.Scripts.GameComponents.Physics;
 
 namespace Joguinho.Scripts
 {
     public class Camera
     {
-        private Vector2 position;
+        public Transform transform { get; private set; } = new Transform();
 
         bool FreeMode = false;
         Entity Target;
@@ -16,20 +17,8 @@ namespace Joguinho.Scripts
 
         public Camera(int width, int height)
         {
-            position = new Vector2(0, 0);
-
             offsetX = width / 2;
             offsetY = height / 2;
-        }
-
-        public float GetX()
-        {
-            return position.X;
-        }
-
-        public float GetY()
-        {
-            return position.Y;
         }
 
         public void Update()
@@ -38,15 +27,20 @@ namespace Joguinho.Scripts
             {
                 Sprite targetSprite = Target.GetComponent<Sprite>();
 
-                position.X = Target.GetPosition().X;
-                position.Y = Target.GetPosition().Y;
+                transform.position = Target.transform.position;
                 
                 if (targetSprite != null)
                 {
-                    position.X -= Target.GetComponent<Sprite>().GetSize().X / 2;
-                    position.Y -= Target.GetComponent<Sprite>().GetSize().Y / 2;
+                    //transform.position -= targetSprite.GetSize() / 2;
+                    //transform.position.X -= Target.GetComponent<Sprite>().GetRectSize().X / 2;
+                    //transform.position.Y -= Target.GetComponent<Sprite>().GetRectSize().Y / 2;
                 }
             }
+        }
+
+        public Vector2 GetCameraPosition()
+        {
+            return new Vector2(transform.position.X - offsetX, transform.position.Y - offsetY);
         }
 
         public void DefineTarget(Entity newTarget)

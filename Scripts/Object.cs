@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Joguinho.Scripts.GameComponents;
+using Joguinho.Scripts.GameComponents.Physics;
 using Joguinho.Scripts.GameComponents.Physics.Collision;
 using Microsoft.Xna.Framework;
 
@@ -8,7 +9,7 @@ namespace Joguinho.Scripts
 {
     public class Object
     {
-        protected Vector2 position;
+        public Transform transform { get; private set; } = new Transform();
 
         protected List<ObjectComponent> components = new List<ObjectComponent>();
 
@@ -19,7 +20,7 @@ namespace Joguinho.Scripts
 
         public Object(Vector2 newPosition)
         {
-            position = newPosition;
+            transform.position = newPosition;
         }
 
         public virtual void StartObject()
@@ -42,8 +43,7 @@ namespace Joguinho.Scripts
 
         public void UpdatePosition(Vector2 newPosition)
         {
-            position.X += newPosition.X;
-            position.Y += newPosition.Y;
+            transform.position += newPosition;
         }
 
         public void UpdateAngle(float newRotation)
@@ -51,9 +51,17 @@ namespace Joguinho.Scripts
             rotation = newRotation;
         }
 
-        public Vector2 GetPosition()
+        public bool HasComponent<T>() where T : ObjectComponent
         {
-            return position;
+            int n = 0;
+            while (n < components.Count)
+            {
+                if (components[n].GetType() == typeof(T))
+                    return true;
+                n++;
+            }
+
+            return false;
         }
 
         public T GetComponent<T>() where T : ObjectComponent
@@ -61,17 +69,26 @@ namespace Joguinho.Scripts
             for (int n = 0; n < components.Count; n++)
             {
                 if (components[n].GetType() == typeof(T))
-                {
-                    return components[n] as T;
-                }
+                    return (T)components[n];
             }
 
             return null;
         }
 
-        public void AddComponent<T>() where T : ObjectComponent
+        public T AddComponent<T>() where T : ObjectComponent
         {
-            components.Add((T)Activator.CreateInstance(typeof(T), new object[] {this}));
+            if (HasComponent<T>())
+            {
+                Console.WriteLine("This " + this.GetType().Name + " object already has a " + typeof(T).Name + " component");
+
+                return GetComponent<T>();
+            }
+
+            T newComponent = (T)Activator.CreateInstance(typeof(T), new object[] {this});
+
+            components.Add(newComponent);
+
+            return newComponent;
         }
 
         public void RemoveAllComponents()

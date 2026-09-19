@@ -1,7 +1,7 @@
 ﻿using Joguinho.Scripts.GameComponents;
 using Joguinho.Scripts.GameComponents.Physics;
 using Joguinho.Scripts.GameComponents.Physics.Collision;
-using Joguinho.Scripts.Graphics;
+using Joguinho.Scripts.GameComponents.Graphics;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;

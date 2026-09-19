@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Joguinho.Scripts.GameComponents.Physics.Interface;
+using Joguinho.Scripts.System;
 
 namespace Joguinho.Scripts.GameComponents.Physics.Collision
 {
@@ -12,7 +13,7 @@ namespace Joguinho.Scripts.GameComponents.Physics.Collision
 
         public BoxCollider(Object newGameObject) : base(newGameObject)
         {
-
+            CollisionSystem.Register(this);
         }
 
         public override void Update()
@@ -41,8 +42,8 @@ namespace Joguinho.Scripts.GameComponents.Physics.Collision
 
         private void UpdateBox()
         {
-            min = new Vector2(gameObject.GetPosition().X - (size.X / 2) + localPosition.X, gameObject.GetPosition().Y - (size.Y / 2) + localPosition.Y);
-            max = new Vector2(gameObject.GetPosition().X + (size.X / 2) + localPosition.X, gameObject.GetPosition().Y + (size.Y / 2) + localPosition.Y);
+            min = new Vector2(gameObject.transform.position.X - (size.X / 2) + localPosition.X, gameObject.transform.position.Y - (size.Y / 2) + localPosition.Y);
+            max = new Vector2(gameObject.transform.position.X + (size.X / 2) + localPosition.X, gameObject.transform.position.Y + (size.Y / 2) + localPosition.Y);
         }
     }
 }
