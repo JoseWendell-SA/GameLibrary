@@ -33,8 +33,6 @@ namespace GameLIB.Scripts.GameComponents
             {
                 boxCollider.SetNewBoxSize(new Vector2(sizeX, sizeY));
                 boxCollider.SetNewCollisionTag(collisionTags);
-
-                GameManager.GMInstance.InsertNewBoxCollider(boxCollider);
             }
 
             catch (Exception e)
@@ -50,8 +48,6 @@ namespace GameLIB.Scripts.GameComponents
 
             List<CollisionTag> collisionTag = [CollisionTag.Terrain];
             boxCollider.SetNewCollisionTag(collisionTag);
-
-            GameManager.GMInstance.InsertNewBoxCollider(tile.GetComponent<BoxCollider>());
         }
 
         public static void InsertTexture(Texture2D newTexture)

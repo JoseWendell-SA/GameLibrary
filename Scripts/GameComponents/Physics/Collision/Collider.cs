@@ -1,5 +1,6 @@
 ﻿using GameLIB.Scripts.GameComponents;
 using GameLIB.Scripts.GameComponents.Physics.Interface;
+using GameLIB.Scripts.System;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
@@ -20,7 +21,22 @@ namespace GameLIB.Scripts.GameComponents.Physics.Collision
 
         public override void DeleteComponent()
         {
-            GameManager.GMInstance.RemoveCollider(this);
+            CollisionSystem.Unregister(this);
+        }
+
+        public virtual bool CheckCollision(Collider newCol)
+        {
+            return false;
+        }
+
+        public virtual bool CheckCollision(BoxCollider boxCol)
+        {
+            return false;
+        }
+
+        public virtual bool CheckCollision(CircleCollider boxCol)
+        {
+            return false;
         }
 
         public void OnCollision(Collider collider)

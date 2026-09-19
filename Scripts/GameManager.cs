@@ -16,8 +16,6 @@ namespace GameLIB.Scripts
 
         public World world;
 
-        private List<BoxCollider> colliders = new List<BoxCollider>();
-
         private List<Object> deleteList = new List<Object>();
 
         private List<FinalScore> allScores;
@@ -42,9 +40,8 @@ namespace GameLIB.Scripts
         public void Update(GameTime gameTime)
         {
             world.Update();
-            IdentifyCollidingBoxes();
-            ClearAllObjectsInDeleteList();
             enemyGenerator.Update();
+            ClearAllObjectsInDeleteList();
 
             if ((int)gameTime.TotalGameTime.TotalSeconds > 0 && (int)gameTime.TotalGameTime.TotalSeconds % (15 * difficultyLevel) == 0)
             {
@@ -58,47 +55,6 @@ namespace GameLIB.Scripts
             (world.entities[0] as Player).AddXp(num);
         }
 
-        private void IdentifyCollidingBoxes()
-        {
-            for (int n = 0; n < colliders.Count; n++)
-            {
-                for (int m = n+1; m < colliders.Count; m++)
-                {
-                    if (AABBvsAABB(colliders[n], colliders[m]))
-                    {
-                        colliders[n].OnCollision(colliders[m]);
-                        colliders[m].OnCollision(colliders[n]);
-                    }
-                }
-            }
-        }
-
-        public void InsertNewBoxCollider(BoxCollider newBoxCollider)
-        {
-            if (!colliders.Contains(newBoxCollider))
-            {
-                colliders.Add(newBoxCollider);
-            }
-        }
-
-        public List<Object> DoesItCollides(BoxCollider target)
-        {
-            List<Object> gameObjects = new List<Object>();
-
-            for (int n = 0; n < colliders.Count; n++)
-            {
-                if (target.gameObject != colliders[n].gameObject)
-                {
-                    if (AABBvsAABB(target, colliders[n]))
-                    {
-                        gameObjects.Add(colliders[n].gameObject);
-                    }
-                }
-            }
-
-            return gameObjects;
-        }
-
         public bool AABBvsAABB(BoxCollider a, BoxCollider b)
         {
             if (a.max.X < b.min.X || a.min.X > b.max.X)
@@ -107,12 +63,6 @@ namespace GameLIB.Scripts
                 return false;
 
             return true;
-        }
-
-        public void RemoveCollider(Collider oldCollider)
-        {
-            colliders.Remove(oldCollider as BoxCollider);
-            Console.WriteLine("Total Colliders: " + colliders.Count);
         }
 
         public void DeleteObject(Object oldObject)

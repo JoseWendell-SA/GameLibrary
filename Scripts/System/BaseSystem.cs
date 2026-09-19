@@ -20,13 +20,39 @@ namespace GameLIB.Scripts.System
 
         public virtual void Update()
         {
-            for (int n = 0; n < components.Count; n++)
+            for (int n = 0; n < components.Count ; n++)
             {
                 components[n].Update();
             }
         }
+
+        public static void Unregister(T oldComponent)
+        {
+            components.Remove(oldComponent);
+        }
     }
 
     public class RigidbodySystem : BaseSystem<Rigidbody> { }
-    public class CollisionSystem : BaseSystem<Collider> { }
+    public class CollisionSystem : BaseSystem<Collider>
+    {
+        public override void Update()
+        {
+            for (int n = 0; n < components.Count ; n++)
+            {
+                components[n].Update();
+
+                for (int k = 0; k < components.Count; k++)
+                {
+                    if (n == k)
+                        continue;
+
+                    if(components[n].CheckCollision(components[k]))
+                    {
+                        components[n].OnCollision(components[k]);
+                        components[k].OnCollision(components[n]);
+                    }
+                }
+            }
+        }
+    }
 }

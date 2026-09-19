@@ -21,7 +21,7 @@ namespace GameLIB.Scripts
         private int timer = 1;
 
         private float fireRate = 10;
-        private float timeToNextShot = 0;
+        private float timeToNextShot = 1;
         private float speed = 75f;
 
         private Rigidbody rigidbody;

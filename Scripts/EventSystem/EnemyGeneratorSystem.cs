@@ -11,7 +11,7 @@ namespace GameLIB.Scripts.EventSystem
     {
         Random random = new Random();
 
-        private int enemyLimit = 0;
+        private int enemyLimit = 1;
 
         Entity target;
 
