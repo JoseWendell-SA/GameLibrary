@@ -24,8 +24,6 @@ namespace GameLIB.Scripts
             newProjectile.AddComponent<Rigidbody>();
             newProjectile.StartObject();
             ComponentUtilities.AddSprite(newProjectile, 34, 16, 16, 2);
-
-            GameManager.GMInstance.world.projectiles.Add(newProjectile);
         }
 
         public static Vector2 DiffBetweenA_B(Vector2 pointA, Vector2 pointB)

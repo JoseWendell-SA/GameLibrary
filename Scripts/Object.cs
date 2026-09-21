@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using GameLIB.Scripts.GameComponents;
 using GameLIB.Scripts.GameComponents.Physics;
 using GameLIB.Scripts.GameComponents.Physics.Collision;
+using GameLIB.Scripts.System;
 using Microsoft.Xna.Framework;
 
 namespace GameLIB.Scripts
@@ -88,10 +89,9 @@ namespace GameLIB.Scripts
             components.RemoveRange(0, components.Count);
         }
 
-        public void SetTimerToDestroy(int newTimerInFrames)
+        public virtual void Destroy()
         {
-            timerInFrames = newTimerInFrames;
-            startTimer = true;
+            RemoveAllComponents();
         }
     }
 }

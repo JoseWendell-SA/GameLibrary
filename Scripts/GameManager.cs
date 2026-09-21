@@ -5,14 +5,12 @@ using System;
 using System.Collections.Generic;
 
 using Microsoft.Xna.Framework;
-using GameLIB.Scripts.EventSystem;
 
 namespace GameLIB.Scripts
 {
     public class GameManager
     {
         public static GameManager GMInstance;
-        private EnemyGeneratorSystem enemyGenerator;
 
         public World world;
 
@@ -29,21 +27,17 @@ namespace GameLIB.Scripts
             GMInstance = this;
 
             List<CollisionTag> test = [CollisionTag.Player];
-
-            ComponentUtilities.AddBoxCollider(world.entities[0], 12, 12, test);
-            enemyGenerator = new EnemyGeneratorSystem(world.entities[0]);
         }
 
         public void Update(GameTime gameTime)
         {
             world.Update();
-            enemyGenerator.Update();
             ClearAllObjectsInDeleteList();
         }
 
         public void NotifyPlayerAboutEnemyDeath(int num)
         {
-            (world.entities[0] as Player).AddXp(num);
+            
         }
 
         public void DeleteObject(Object oldObject)
@@ -62,12 +56,12 @@ namespace GameLIB.Scripts
 
                 if (deleteList[0] is Projectile)
                 {
-                    world.projectiles.Remove(deleteList[0] as Projectile);
+                    //world.projectiles.Remove(deleteList[0] as Projectile);
                 }
 
                 else if (deleteList[0] is Entity)
                 {
-                    world.entities.Remove(deleteList[0] as Entity);
+                    //world.entities.Remove(deleteList[0] as Entity);
                 }
 
                 deleteList.RemoveAt(0);
@@ -76,18 +70,6 @@ namespace GameLIB.Scripts
 
         public Entity GetEntityByCollisionTag(CollisionTag targetTag)
         {
-            int n = 0;
-
-            while (n < world.entities.Count)
-            {
-                if (world.entities[n].GetComponent<BoxCollider>().collisionTag.Contains(targetTag))
-                {
-                    return world.entities[n];
-                }
-
-                n++;
-            }
-
             return null;
         }
 

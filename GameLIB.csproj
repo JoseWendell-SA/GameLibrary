@@ -24,6 +24,7 @@
 	  <None Remove="NovaPasta1\**" />
 	</ItemGroup>
 	<ItemGroup>
+	  <Folder Include="Scripts\EventSystem\" />
 	  <Folder Include="Scripts\GameComponents\Renderer\" />
 	</ItemGroup>
 

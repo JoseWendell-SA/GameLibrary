@@ -38,58 +38,21 @@ namespace GameLIB.Scripts
             new int[]{1, 1, 1, 1, 1, 1, 1, 1, 1}
         };*/
 
-        public List<Entity> entities = new List<Entity>();
-        public List<Projectile> projectiles = new List<Projectile>();
-
         public readonly Camera camera;
 
         public World(Camera newCamera, Player player)
         {
             camera = newCamera;
             camera.DefineTarget(player);
-            entities.Add(player);
-            entities[0].UpdatePosition(new Vector2(0, 0));
         }
 
         public void Update()
         {
-            for (int n = 0; n < entities.Count ; n++)
-            {
-                entities[n].Update();
-            }
-
-            for (int n = 0; n < projectiles.Count ; n++)
-            {
-                projectiles[n].Update();
-            }
-        }
-
-        public bool AABBvsAABB(BoxCollider a, BoxCollider b)
-        {
-            if (a.max.X < b.min.X || a.min.X > b.max.X)
-                return false;
-            else if (a.max.Y < b.min.Y || a.min.Y > b.max.Y)
-                return false;
-
-            return true;
-        }
-
-        public bool CirclevsCircle(CircleCollider a, CircleCollider b)
-        {
-            float r = a.radius + b.radius;
-            r *= r;
-            float ca = (a.position.X + b.position.X);
-            ca = ca * ca;
-            float cb = (a.position.Y + b.position.Y);
-            cb = cb * cb;
-
-            return r < ca + cb;
+            
         }
 
         public void InsertObject()
         {
-            ComponentUtilities.AddSprite(entities[0], 35, 16, 16, 2);
-
             /*for (int y = 0; y < testMap.Length; y++)
             {
                 map.Add(new List<Tile>());

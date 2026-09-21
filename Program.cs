@@ -40,6 +40,7 @@ class Program : Game
     RigidbodySystem rigidbodySystem = new RigidbodySystem();
     CollisionSystem collisionSystem = new CollisionSystem();
     SpriteSystem spriteSystem = new SpriteSystem();
+    EntitySystem entitySystem = new EntitySystem();
 
     bool pause = true;
 
@@ -89,6 +90,8 @@ class Program : Game
         offsetMouseHeight = (int)MathF.Floor(hDiff * 0.5f);
         MouseInput.ConvertWindowWidth(Window.ClientBounds.Width, offsetMouseWidth, RenderWidth, camera.offsetX);
         MouseInput.ConvertWindowHeight(Window.ClientBounds.Height, offsetMouseHeight, RenderHeight, camera.offsetY);
+
+        ComponentUtilities.AddSprite(player, 35, 16, 16, 2);
     }
 
     protected override void LoadContent()
@@ -124,6 +127,7 @@ class Program : Game
         KeyboardState keyboardCur = Keyboard.GetState();
         GamePadState gpCur = GamePad.GetState(PlayerIndex.One);
 
+        entitySystem.Update();
         rigidbodySystem.Update();
         collisionSystem.Update();
         spriteSystem.Update();

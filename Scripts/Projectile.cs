@@ -11,7 +11,7 @@ namespace GameLIB.Scripts
     {
         private Player origin;
 
-        private float speed = 5f;
+        private float speed = 0.5f;
 
         private Rigidbody rigidbody;
 
