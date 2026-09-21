@@ -1,4 +1,5 @@
 ﻿using GameLIB.Scripts.GameComponents.Graphics;
+using GameLIB.Scripts.System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -13,59 +14,10 @@ namespace GameLIB.Scripts.Interface
         static SpriteBatch batch;
         static SpriteFont spriteFont;
 
-        static List<Sprite> sprites = new List<Sprite>();
-
-        public static void InsertSprite(Sprite newSprite)
-        {
-
-            if (sprites.Count == 0)
-            {
-                sprites.Add(newSprite);
-            }
-
-            else
-            {
-                int n = 1;
-                int newSpriteLayer = newSprite.GetLayer();
-
-                if (!sprites.Contains(newSprite))
-                {
-                    if (sprites[0].GetLayer() > newSpriteLayer)
-                    {
-                        sprites.Insert(0, newSprite);
-                    }
-
-                    else
-                    {
-                        while (n < sprites.Count && newSpriteLayer > sprites[n].GetLayer())
-                        {
-                            n++;
-                        }
-
-                        if (n == sprites.Count)
-                        {
-                            sprites.Add(newSprite);
-                        }
-
-                        else
-                        {
-                            sprites.Insert(n, newSprite);
-                        }
-                    }
-                }
-            }
-        }
-
-        public static void RemoveSprite(Sprite oldSprite)
-        {
-            sprites.Remove(oldSprite);
-            Console.WriteLine("Total: " + sprites.Count);
-        }
-
         public static void DrawElements(Texture2D texture)
         {
-            float posX;
-            float posY;
+            List<Sprite> sprites = SpriteSystem.GetSpriteList();
+            Vector2 pos;
 
             batch.Begin(SpriteSortMode.BackToFront, BlendState.AlphaBlend, SamplerState.PointClamp, DepthStencilState.None, RasterizerState.CullCounterClockwise);
 
@@ -80,8 +32,7 @@ namespace GameLIB.Scripts.Interface
                 {
                     batch.DrawString(spriteFont, ("Score: " + GameManager.GMInstance.score.ToString()), new Vector2(0, 0), Color.White, 0, Vector2.One, 0.3f, SpriteEffects.None, 1);
 
-                    posX = sprites[n].GetSpritePositionInInterface().X - GameManager.GMInstance.world.camera.GetCameraPosition().X;
-                    posY = sprites[n].GetSpritePositionInInterface().Y - GameManager.GMInstance.world.camera.GetCameraPosition().Y;
+                    pos = sprites[n].GetSpritePositionInInterface();
 
                     Vector2 spriteRect = sprites[n].GetRect();
                     Vector2 spriteRectSize = sprites[n].GetRectSize();
@@ -92,7 +43,7 @@ namespace GameLIB.Scripts.Interface
                     {
                         //Console.WriteLine("X: " + posX + " | Y: " + posY);
                     }
-                    batch.Draw(texture, new Vector2(posX, posY), rect, Color.White, (float)sprites[n].gameObject.rotation, origin, 1f, SpriteEffects.None, 0);
+                    batch.Draw(texture, new Vector2(pos.X, pos.Y), rect, Color.White, (float)sprites[n].gameObject.rotation, origin, 1f, SpriteEffects.None, 0);
                 }
             }
 
@@ -113,11 +64,11 @@ namespace GameLIB.Scripts.Interface
                 List<FinalScore> scores = GameManager.GMInstance.GetAllScores();
                 for (int n = 0; n < scores.Count; n++)
                 {
-                    batch.DrawString(spriteFont, (scores[n].name + scores[n].score.ToString()), new Vector2(110, 0 + (12*n)), Color.White, 0, Vector2.One, 0.3f, SpriteEffects.None, 1);
+                    batch.DrawString(spriteFont, (scores[n].name + scores[n].score.ToString()), new Vector2(110, 0 + (12 * n)), Color.White, 0, Vector2.One, 0.3f, SpriteEffects.None, 1);
                 }
             }
 
-                batch.End();
+            batch.End();
         }
 
         public static void SetWorldAndSpriteBatch(SpriteBatch newBatch, SpriteFont newFont)

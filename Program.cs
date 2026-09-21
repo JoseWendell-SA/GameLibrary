@@ -39,6 +39,7 @@ class Program : Game
 
     RigidbodySystem rigidbodySystem = new RigidbodySystem();
     CollisionSystem collisionSystem = new CollisionSystem();
+    SpriteSystem spriteSystem = new SpriteSystem();
 
     bool pause = true;
 
@@ -125,6 +126,7 @@ class Program : Game
 
         rigidbodySystem.Update();
         collisionSystem.Update();
+        spriteSystem.Update();
 
         
         MouseInput.UpdateMouse();

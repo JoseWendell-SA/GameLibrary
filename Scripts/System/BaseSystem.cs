@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using GameLIB.Scripts.GameComponents;
+using GameLIB.Scripts.GameComponents.Graphics;
 using GameLIB.Scripts.GameComponents.Physics;
 using GameLIB.Scripts.GameComponents.Physics.Collision;
 
@@ -32,6 +33,13 @@ namespace GameLIB.Scripts.System
         }
     }
 
+    public class SpriteSystem : BaseSystem<Sprite>
+    {
+        internal static List<Sprite> GetSpriteList()
+        {
+            return components;
+        }
+    }
     public class RigidbodySystem : BaseSystem<Rigidbody> { }
     public class CollisionSystem : BaseSystem<Collider>
     {

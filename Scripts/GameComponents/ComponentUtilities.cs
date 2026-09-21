@@ -21,8 +21,6 @@ namespace GameLIB.Scripts.GameComponents
             sprite.SetSprite(posX, posY);
             sprite.SetSize(sizeX, sizeY);
             sprite.SetLayer(layer);
-
-            InterfaceManager.InsertSprite(sprite);
         }
 
         public static void AddBoxCollider(Object gameObject, int sizeX, int sizeY, List<CollisionTag> collisionTags)

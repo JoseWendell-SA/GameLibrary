@@ -37,5 +37,10 @@ namespace GameLIB.Scripts.GameComponents.Physics
 
             velocity += acceleration;
         }
+
+        public override void DeleteComponent()
+        {
+            RigidbodySystem.Unregister(this);
+        }
     }
 }

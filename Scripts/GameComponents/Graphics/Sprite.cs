@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using GameLIB.Scripts.Interface;
+using GameLIB.Scripts.System;
 
 namespace GameLIB.Scripts.GameComponents.Graphics
 {
@@ -10,6 +11,7 @@ namespace GameLIB.Scripts.GameComponents.Graphics
     {
         private Vector2 rect;
         private Vector2 rectSize;
+        private Vector2 positionInInterface;
 
         private int offsetX;
         private int offsetY;
@@ -18,7 +20,12 @@ namespace GameLIB.Scripts.GameComponents.Graphics
 
         public Sprite(Object newGameObject) : base(newGameObject)
         {
+            SpriteSystem.Register(this);
+        }
 
+        public override void Update()
+        {
+            positionInInterface = new Vector2(gameObject.transform.position.X - GameManager.GMInstance.world.camera.GetCameraPosition().X, gameObject.transform.position.Y - GameManager.GMInstance.world.camera.GetCameraPosition().Y);
         }
 
         public void SetSprite(int spX, int spY)
@@ -54,7 +61,7 @@ namespace GameLIB.Scripts.GameComponents.Graphics
 
         public Vector2 GetSpritePositionInInterface()
         {
-            return new Vector2(gameObject.transform.position.X, gameObject.transform.position.Y);
+            return positionInInterface;
         }
 
         public int GetLayer()
@@ -64,7 +71,7 @@ namespace GameLIB.Scripts.GameComponents.Graphics
 
         public override void DeleteComponent()
         {
-            InterfaceManager.RemoveSprite(this);
+            SpriteSystem.Unregister(this);
         }
     }
 }
