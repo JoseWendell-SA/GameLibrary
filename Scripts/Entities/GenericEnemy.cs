@@ -49,9 +49,9 @@ namespace GameLIB.Scripts.Entities
 
         public void ChangeType(int num)
         {
-            health *= num + GameManager.GMInstance.difficultyLevel / 2;
+            health *= num;
             enemyType = num;
-            score = score * enemyType + GameManager.GMInstance.difficultyLevel * 2;
+            score = score * enemyType;
 
             //speed = speed + (((float)num-1)/3) + (GameManager.GMInstance.difficultyLevel-1)/10;
             speed = 45f;
@@ -65,7 +65,7 @@ namespace GameLIB.Scripts.Entities
 
                 if (health <= 0)
                 {
-                    GameManager.GMInstance.NotifyPlayerAboutEnemyDeath(enemyType * GameManager.GMInstance.difficultyLevel);
+                    GameManager.GMInstance.NotifyPlayerAboutEnemyDeath(enemyType);
 
                     Console.WriteLine("Enemy tier " + enemyType + " has been destroyed");
                     

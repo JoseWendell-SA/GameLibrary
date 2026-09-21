@@ -18,10 +18,7 @@ namespace GameLIB.Scripts
 
         private List<Object> deleteList = new List<Object>();
 
-        private List<FinalScore> allScores;
-
         public int gameLevel {get; private set;} = 0;
-        public int difficultyLevel = 1;
         public int score = 0;
         public char[] name = [' ', ' ', ' '];
         public int nameIndex = 0;
@@ -42,27 +39,11 @@ namespace GameLIB.Scripts
             world.Update();
             enemyGenerator.Update();
             ClearAllObjectsInDeleteList();
-
-            if ((int)gameTime.TotalGameTime.TotalSeconds > 0 && (int)gameTime.TotalGameTime.TotalSeconds % (15 * difficultyLevel) == 0)
-            {
-                difficultyLevel += 1;
-                Console.WriteLine("Difficulty Level Increased: " + difficultyLevel);
-            }
         }
 
         public void NotifyPlayerAboutEnemyDeath(int num)
         {
             (world.entities[0] as Player).AddXp(num);
-        }
-
-        public bool AABBvsAABB(BoxCollider a, BoxCollider b)
-        {
-            if (a.max.X < b.min.X || a.min.X > b.max.X)
-                return false;
-            else if (a.max.Y < b.min.Y || a.min.Y > b.max.Y)
-                return false;
-
-            return true;
         }
 
         public void DeleteObject(Object oldObject)
@@ -108,16 +89,6 @@ namespace GameLIB.Scripts
             }
 
             return null;
-        }
-
-        public void SetAllScores(List<FinalScore> loadedScores)
-        {
-            allScores = loadedScores;
-        }
-
-        public List<FinalScore> GetAllScores()
-        {
-            return allScores;
         }
 
         public void ChangeGameLevel(int newLevel)

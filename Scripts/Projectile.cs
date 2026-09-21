@@ -7,7 +7,7 @@ using GameLIB.Scripts.GameComponents.Physics.Collision;
 
 namespace GameLIB.Scripts
 {
-    public class Projectile : Object, IOnCollisionEnter
+    public class Projectile : Entity, IOnCollisionEnter
     {
         private Player origin;
 

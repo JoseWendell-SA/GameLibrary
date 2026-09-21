@@ -12,12 +12,7 @@ namespace GameLIB.Scripts
 
         }
 
-        public override void Update()
-        {
-            
-        }
-
-        public virtual void Move()
+        public virtual void Update()
         {
             
         }

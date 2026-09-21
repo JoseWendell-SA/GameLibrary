@@ -59,15 +59,6 @@ namespace GameLIB.Scripts.Interface
                 batch.DrawString(spriteFont, (text + "\nScore: " + GameManager.GMInstance.score), new Vector2(120, 110), Color.White, 0, Vector2.One, 0.3f, SpriteEffects.None, 1);
             }
 
-            else if (GameManager.GMInstance.gameLevel == 4)
-            {
-                List<FinalScore> scores = GameManager.GMInstance.GetAllScores();
-                for (int n = 0; n < scores.Count; n++)
-                {
-                    batch.DrawString(spriteFont, (scores[n].name + scores[n].score.ToString()), new Vector2(110, 0 + (12 * n)), Color.White, 0, Vector2.One, 0.3f, SpriteEffects.None, 1);
-                }
-            }
-
             batch.End();
         }
 

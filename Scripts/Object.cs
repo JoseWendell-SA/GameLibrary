@@ -28,19 +28,6 @@ namespace GameLIB.Scripts
             
         }
 
-        public virtual void Update()
-        {
-            if (startTimer)
-            {
-                if (timerInFrames <= 0)
-                {
-                    GameManager.GMInstance.DeleteObject(this);
-                }
-
-                timerInFrames -= 1;
-            }
-        }
-
         public void UpdatePosition(Vector2 newPosition)
         {
             transform.position += newPosition;
