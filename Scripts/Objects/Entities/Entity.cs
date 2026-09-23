@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using GameLIB.Scripts.GameComponents.Physics.Collision;
 using GameLIB.Scripts.System;
+using GameLIB.Scripts.Objects;
 
-namespace GameLIB.Scripts
+namespace GameLIB.Scripts.Objects.Entities
 {
-    public class Entity : Object
+    public class Entity : GameObject
     {
         public Entity(Vector2 newPosition) : base(newPosition)
         {

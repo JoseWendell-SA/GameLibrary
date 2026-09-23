@@ -7,9 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 using GameLIB.Scripts.Interface;
 using GameLIB.Scripts.GameComponents;
 using GameLIB.Scripts.GameComponents.Physics;
-
-//Test, delete later
-using GameLIB.Scripts.Entities;
+using GameLIB.Scripts.Objects.Entities;
 
 namespace GameLIB.Scripts
 {

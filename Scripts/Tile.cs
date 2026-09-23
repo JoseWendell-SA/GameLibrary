@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using GameLIB.Scripts.Objects;
 using Microsoft.Xna.Framework;
 
 namespace GameLIB.Scripts
 {
-    public class Tile : Object
+    public class Tile : GameObject
     {
         public bool wasFilled = false;
 

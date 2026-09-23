@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using GameLIB.Scripts.GameComponents;
 using GameLIB.Scripts.GameComponents.Physics.Collision;
 using GameLIB.Scripts.Interface;
-using GameLIB.Scripts;
 using Microsoft.Xna.Framework;
 using GameLIB.Scripts.System;
+using GameLIB.Scripts.Objects;
 
 namespace GameLIB.Scripts.GameComponents.Physics
 {
@@ -19,7 +19,7 @@ namespace GameLIB.Scripts.GameComponents.Physics
 
         public Vector2 velocity;
 
-        public Rigidbody(Object newGameObject) : base(newGameObject)
+        public Rigidbody(GameObject newGameObject) : base(newGameObject)
         {
             RigidbodySystem.Register(this);
         }

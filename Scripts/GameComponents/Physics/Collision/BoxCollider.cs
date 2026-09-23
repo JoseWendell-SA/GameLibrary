@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using GameLIB.Scripts.GameComponents.Physics.Interface;
 using GameLIB.Scripts.System;
+using GameLIB.Scripts.Objects;
 
 namespace GameLIB.Scripts.GameComponents.Physics.Collision
 {
@@ -11,7 +12,7 @@ namespace GameLIB.Scripts.GameComponents.Physics.Collision
 
         public Vector2 size;
 
-        public BoxCollider(Object newGameObject) : base(newGameObject)
+        public BoxCollider(GameObject newGameObject) : base(newGameObject)
         {
             CollisionSystem.Register(this);
         }

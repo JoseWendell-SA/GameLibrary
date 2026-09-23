@@ -4,6 +4,7 @@ using GameLIB.Scripts.GameComponents.Physics;
 using Microsoft.Xna.Framework;
 using GameLIB.Scripts.GameComponents.Physics.Interface;
 using GameLIB.Scripts.GameComponents.Physics.Collision;
+using GameLIB.Scripts.Objects.Entities;
 
 namespace GameLIB.Scripts
 {

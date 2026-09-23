@@ -1,5 +1,6 @@
 ﻿using GameLIB.Scripts.GameComponents;
 using GameLIB.Scripts.GameComponents.Physics.Interface;
+using GameLIB.Scripts.Objects;
 using GameLIB.Scripts.System;
 using Microsoft.Xna.Framework;
 using System;
@@ -14,7 +15,7 @@ namespace GameLIB.Scripts.GameComponents.Physics.Collision
         public List<CollisionTag> collisionTag { get; private set; } = new List<CollisionTag>();
         public float restitution = 0;
 
-        public Collider(Object newGameObject) : base(newGameObject)
+        public Collider(GameObject newGameObject) : base(newGameObject)
         {
             
         }

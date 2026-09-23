@@ -1,5 +1,4 @@
 ﻿using GameLIB.Scripts;
-using GameLIB.Scripts.GameComponents;
 using GameLIB.Scripts.GameComponents.Physics.Collision;
 using GameLIB.Scripts.GameComponents.Graphics;
 using GameLIB.Scripts.Input;
@@ -13,6 +12,8 @@ using System.Text.Json;
 using System.IO;
 using GameLIB.Scripts.Interface;
 using GameLIB.Scripts.System;
+using GameLIB.Scripts.Utilities;
+using GameLIB.Scripts.Objects.Entities;
 
 class Program : Game
 {
@@ -101,7 +102,7 @@ class Program : Game
         texture = Content.Load<Texture2D>("Teste");
 
         InterfaceManager.SetWorldAndSpriteBatch(batch, spriteFont);
-        ComponentUtilities.InsertTexture(texture);
+        ComponentUtilities.texture = texture;
 
         base.LoadContent();
     }

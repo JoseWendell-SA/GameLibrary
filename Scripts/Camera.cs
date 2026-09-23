@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using GameLIB.Scripts.GameComponents.Graphics;
 using GameLIB.Scripts.GameComponents.Physics;
+using GameLIB.Scripts.Objects.Entities;
 
 namespace GameLIB.Scripts
 {

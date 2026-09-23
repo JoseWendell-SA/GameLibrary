@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework;
 
 namespace GameLIB.Scripts
 {
-    public class Object
+    public class GameObject
     {
         public Transform transform { get; private set; } = new Transform();
 
@@ -19,7 +19,7 @@ namespace GameLIB.Scripts
         protected bool startTimer = false;
         protected float timerInFrames = 0;
 
-        public Object(Vector2 newPosition)
+        public GameObject(Vector2 newPosition)
         {
             transform.position = newPosition;
         }

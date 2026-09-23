@@ -1,12 +1,11 @@
-﻿using GameLIB.Scripts.GameComponents;
-using GameLIB.Scripts.GameComponents.Physics;
+﻿using GameLIB.Scripts.GameComponents.Physics;
 using GameLIB.Scripts.GameComponents.Physics.Collision;
 using GameLIB.Scripts.GameComponents.Graphics;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 
-namespace GameLIB.Scripts
+namespace GameLIB.Scripts.Utilities
 {
     public static class GameUtilities
     {

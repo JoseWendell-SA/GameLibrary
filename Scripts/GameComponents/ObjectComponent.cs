@@ -1,13 +1,14 @@
-﻿using System;
+﻿using GameLIB.Scripts.Objects;
+using System;
 using System.Collections.Generic;
 
 namespace GameLIB.Scripts.GameComponents
 {
     public class ObjectComponent
     {
-        public Object gameObject { get; private set; }
+        public GameObject gameObject { get; private set; }
 
-        public ObjectComponent(Object newGameObject)
+        public ObjectComponent(GameObject newGameObject)
         {
             gameObject = newGameObject;
         }

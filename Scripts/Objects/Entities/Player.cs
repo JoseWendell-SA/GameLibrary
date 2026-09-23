@@ -9,8 +9,9 @@ using System;
 using System.Collections.Generic;
 using System.Net.Security;
 using GameLIB.Scripts.GameComponents;
+using GameLIB.Scripts.Utilities;
 
-namespace GameLIB.Scripts
+namespace GameLIB.Scripts.Objects.Entities
 {
     public class Player : Entity, IOnCollisionEnter
     {

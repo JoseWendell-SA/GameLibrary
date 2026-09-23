@@ -1,4 +1,5 @@
-﻿using GameLIB.Scripts.System;
+﻿using GameLIB.Scripts.Objects;
+using GameLIB.Scripts.System;
 using Microsoft.Xna.Framework;
 using System;
 
@@ -9,7 +10,7 @@ namespace GameLIB.Scripts.GameComponents.Physics.Collision
         public float radius;
         public Vector2 position;
 
-        public CircleCollider(Object newGameObject) : base(newGameObject)
+        public CircleCollider(GameObject newGameObject) : base(newGameObject)
         {
             CollisionSystem.Register(this);
         }

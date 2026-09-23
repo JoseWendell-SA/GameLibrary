@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using GameLIB.Scripts.Interface;
 using GameLIB.Scripts.System;
+using GameLIB.Scripts.Objects;
 
 namespace GameLIB.Scripts.GameComponents.Graphics
 {
@@ -18,7 +19,7 @@ namespace GameLIB.Scripts.GameComponents.Graphics
 
         private int layer = 0;
 
-        public Sprite(Object newGameObject) : base(newGameObject)
+        public Sprite(GameObject newGameObject) : base(newGameObject)
         {
             SpriteSystem.Register(this);
         }

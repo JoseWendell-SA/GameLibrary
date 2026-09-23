@@ -1,10 +1,11 @@
-﻿using GameLIB.Scripts.Entities;
-using GameLIB.Scripts.GameComponents;
+﻿using GameLIB.Scripts.GameComponents;
 using GameLIB.Scripts.GameComponents.Physics.Collision;
 using System;
 using System.Collections.Generic;
 
 using Microsoft.Xna.Framework;
+using GameLIB.Scripts.Objects;
+using GameLIB.Scripts.Objects.Entities;
 
 namespace GameLIB.Scripts
 {
@@ -14,7 +15,7 @@ namespace GameLIB.Scripts
 
         public World world;
 
-        private List<Object> deleteList = new List<Object>();
+        private List<GameObject> deleteList = new List<GameObject>();
 
         public int gameLevel {get; private set;} = 0;
         public int score = 0;
@@ -40,7 +41,7 @@ namespace GameLIB.Scripts
             
         }
 
-        public void DeleteObject(Object oldObject)
+        public void DeleteObject(GameObject oldObject)
         {
             if (!deleteList.Contains(oldObject))
             {

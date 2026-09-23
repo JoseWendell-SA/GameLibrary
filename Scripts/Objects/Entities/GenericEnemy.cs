@@ -1,11 +1,12 @@
 ﻿using GameLIB.Scripts.GameComponents.Physics;
 using GameLIB.Scripts.GameComponents.Physics.Collision;
 using GameLIB.Scripts.GameComponents.Physics.Interface;
+using GameLIB.Scripts.Utilities;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 
-namespace GameLIB.Scripts.Entities
+namespace GameLIB.Scripts.Objects.Entities
 {
     public class GenericEnemy : Entity, IOnCollisionEnter
     {
