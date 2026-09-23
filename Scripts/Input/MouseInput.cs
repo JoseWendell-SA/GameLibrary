@@ -30,6 +30,21 @@ namespace GameLIB.Scripts.Input
             UpdatePosition();
         }
 
+        public static bool GetLeftButtonHold()
+        {
+            return mouseCur.LeftButton == ButtonState.Pressed;
+        }
+
+        public static bool GetLeftButtonDown()
+        {
+            return (mouseCur.LeftButton == ButtonState.Pressed && mousePrev.LeftButton == ButtonState.Released);
+        }
+
+        public static bool GetLeftButtonUp()
+        {
+            return (mouseCur.LeftButton == ButtonState.Released && mousePrev.LeftButton == ButtonState.Pressed);
+        }
+
         public static Vector2 GetMousePosition()
         {
             return new Vector2(posX, posY);

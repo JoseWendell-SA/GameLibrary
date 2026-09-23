@@ -14,10 +14,6 @@ namespace GameLIB.Scripts
 {
     public class Player : Entity, IOnCollisionEnter
     {
-        private KeyboardState keyboardPrev = new KeyboardState();
-        private MouseState mousePrev = new MouseState();
-        private MouseState mouseCur;
-
         private float num = 0;
         private int timer = 1;
 
@@ -50,17 +46,14 @@ namespace GameLIB.Scripts
         {
             base.Update();
 
-            KeyboardState keyboardCur = Keyboard.GetState();
-            mouseCur = Mouse.GetState();
-
             num += 1;
 
-            if (keyboardCur.IsKeyDown(Keys.W))
+            if (KeyboardInput.GetKeyHold(Keys.W))
             {
                 mov.Y = -1;
             }
 
-            else if (keyboardCur.IsKeyDown(Keys.S))
+            else if (KeyboardInput.GetKeyHold(Keys.S))
             {
                 mov.Y = 1;
             }
@@ -70,12 +63,12 @@ namespace GameLIB.Scripts
                 mov.Y = 0;
             }
 
-            if (keyboardCur.IsKeyDown(Keys.D))
+            if (KeyboardInput.GetKeyHold(Keys.D))
             {
                 mov.X = 1;
             }
 
-            else if (keyboardCur.IsKeyDown(Keys.A))
+            else if (KeyboardInput.GetKeyHold(Keys.A))
             {
                 mov.X = -1;
             }
@@ -85,7 +78,7 @@ namespace GameLIB.Scripts
                 mov.X = 0;
             }
 
-            if (keyboardPrev.IsKeyUp(Keys.U) && keyboardCur.IsKeyDown(Keys.U))
+            if (KeyboardInput.GetKeyDown(Keys.P))
             {
                 if (timer > 1)
                 {
@@ -93,7 +86,7 @@ namespace GameLIB.Scripts
                 }
             }
 
-            if (keyboardPrev.IsKeyUp(Keys.I) && keyboardCur.IsKeyDown(Keys.I))
+            if (KeyboardInput.GetKeyDown(Keys.I))
             {
                 if (timer < 60)
                 {
@@ -101,16 +94,11 @@ namespace GameLIB.Scripts
                 }
             }
 
-            if (keyboardPrev.IsKeyUp(Keys.C) && keyboardCur.IsKeyDown(Keys.C))
-            {
-                
-            }
-
             Vector2 direction = GameUtilities.DiffBetweenA_B(MouseInput.GetMouseMapPosition(), transform.position);
             float angle = (float)(Math.Atan2(direction.Y, direction.X));
             rotation = angle;
 
-            if (mouseCur.LeftButton == ButtonState.Pressed && num > timeToNextShot)
+            if (MouseInput.GetLeftButtonHold() && num > timeToNextShot)
             {
                 List<CollisionTag> collisionTags = [CollisionTag.Projectile];
                 GameUtilities.CreateProjectile(transform.position, 120, angle, collisionTags);
@@ -121,8 +109,6 @@ namespace GameLIB.Scripts
             //rigidbody.AddForce(mov * speed * Time.deltaTime);
             rigidbody.velocity = mov * speed * Time.deltaTime;
             //Console.WriteLine("Velocity: " + rigidbody.velocity);
-            
-            keyboardPrev = keyboardCur;
         }
 
         public void AddXp(int xp)

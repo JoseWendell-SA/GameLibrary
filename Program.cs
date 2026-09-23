@@ -29,9 +29,6 @@ class Program : Game
     public static readonly int RenderHeight = 240;
     public static RenderTarget2D RenderTarget;
     public static readonly float AspectRatio = (float)RenderWidth / RenderHeight;
-
-    private MouseState mousePrev = new MouseState();
-    private MouseState mouseCur;
     Player player;
     Camera camera;
     World world;
@@ -47,8 +44,6 @@ class Program : Game
     private SpriteBatch batch;
     private Texture2D texture;
     SpriteFont spriteFont;
-
-    KeyboardState keyboardPrev;
 
     int offsetMouseWidth = 0;
     int offsetMouseHeight = 0;
@@ -123,21 +118,17 @@ class Program : Game
     {
         // Run game logic in here. Do NOT render anything here!
         Time.UpdateGameTime(gameTime);
-        mouseCur = Mouse.GetState();
-        KeyboardState keyboardCur = Keyboard.GetState();
         GamePadState gpCur = GamePad.GetState(PlayerIndex.One);
+
+        MouseInput.UpdateMouse();
+        KeyboardInput.Update();
 
         entitySystem.Update();
         rigidbodySystem.Update();
         collisionSystem.Update();
         spriteSystem.Update();
 
-        
-        MouseInput.UpdateMouse();
-
-        Keys[] pressedKeys = keyboardCur.GetPressedKeys();
-
-        if (keyboardCur.IsKeyDown(Keys.L) && keyboardPrev.IsKeyUp(Keys.L) && pause)
+        if (KeyboardInput.GetKeyDown(Keys.L) && pause)
         {
             world.InsertObject();
             pause = false;
@@ -149,9 +140,6 @@ class Program : Game
             gameManager.Update(gameTime);
             camera.Update();
         }
-
-        mousePrev = mouseCur;
-        keyboardPrev = keyboardCur;
 
         base.Update(gameTime);
     }
