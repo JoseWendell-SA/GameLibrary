@@ -56,6 +56,9 @@ namespace GameLIB.Scripts.System
 
                     if(components[n].CheckCollision(components[k]))
                     {
+                        Console.WriteLine("Collision Happened at: X: " + components[n].gameObject.transform.position.X + " Y: " + components[n].gameObject.transform.position.Y);
+                        Console.WriteLine("Collision Happened at: X: " + components[k].gameObject.transform.position.X + " Y: " + components[k].gameObject.transform.position.Y);
+
                         components[n].OnCollision(components[k]);
                         components[k].OnCollision(components[n]);
                     }

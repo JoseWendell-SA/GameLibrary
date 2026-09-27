@@ -31,6 +31,7 @@ class Program : Game
     public static RenderTarget2D RenderTarget;
     public static readonly float AspectRatio = (float)RenderWidth / RenderHeight;
     Player player;
+    Entity test;
     Camera camera;
     World world;
     GameManager gameManager;
@@ -70,6 +71,7 @@ class Program : Game
          * loading configuration stuff in the constructor
          */
         player = new Player(new Vector2(0, 0));
+
         camera = new Camera(RenderWidth, RenderHeight);
         world = new World(camera, player);
         gameManager = new GameManager(world);
@@ -87,7 +89,15 @@ class Program : Game
         MouseInput.ConvertWindowWidth(Window.ClientBounds.Width, offsetMouseWidth, RenderWidth, camera.offsetX);
         MouseInput.ConvertWindowHeight(Window.ClientBounds.Height, offsetMouseHeight, RenderHeight, camera.offsetY);
 
-        ComponentUtilities.AddSprite(player, 35, 16, 16, 2);
+        ComponentUtilities.AddSprite(player, 30, 16, 16, 2);
+        //Test------------------
+        BoxCollider bc = player.AddComponent<BoxCollider>();
+        bc.size = new Vector2(16, 16);
+        test = new Entity(new Vector2(14, 14));
+        ComponentUtilities.AddSprite(test, 30, 16, 16, 1);
+        CircleCollider ccll = test.AddComponent<CircleCollider>();
+        ccll.radius = 4;
+        //----------------------
     }
 
     protected override void LoadContent()

@@ -65,6 +65,8 @@ namespace GameLIB.Scripts
 
         public T AddComponent<T>() where T : ObjectComponent
         {
+            Console.WriteLine("Component of " + typeof(T) + " was added");
+
             if (HasComponent<T>())
             {
                 Console.WriteLine("This " + this.GetType().Name + " object already has a " + typeof(T).Name + " component");

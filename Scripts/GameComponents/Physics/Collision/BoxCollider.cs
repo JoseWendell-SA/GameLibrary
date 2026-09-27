@@ -1,7 +1,8 @@
-﻿using Microsoft.Xna.Framework;
-using GameLIB.Scripts.GameComponents.Physics.Interface;
-using GameLIB.Scripts.System;
+﻿using GameLIB.Scripts.GameComponents.Physics.Interface;
 using GameLIB.Scripts.Objects;
+using GameLIB.Scripts.System;
+using Microsoft.Xna.Framework;
+using System;
 
 namespace GameLIB.Scripts.GameComponents.Physics.Collision
 {
@@ -64,7 +65,22 @@ namespace GameLIB.Scripts.GameComponents.Physics.Collision
 
         public override bool CheckCollision(CircleCollider cirCol)
         {
-            return false;
+            float circleDistX = MathF.Abs(cirCol.gameObject.transform.position.X - gameObject.transform.position.X);
+            float circleDistY = MathF.Abs(cirCol.gameObject.transform.position.Y - gameObject.transform.position.Y);
+
+            if (circleDistX > (size.X / 2 + cirCol.radius))
+                return false;
+            if (circleDistY > (size.Y / 2 + cirCol.radius))
+                return false;
+
+            if (circleDistX <= size.X / 2)
+                return true;
+            if (circleDistY <= size.Y / 2)
+                return true;
+
+            float cornerDist = MathF.Pow((circleDistX - size.X / 2), 2) + MathF.Pow((circleDistY - size.Y / 2), 2);
+
+            return cornerDist <= cirCol.radius * cirCol.radius;
         }
     }
 }

@@ -51,12 +51,12 @@ namespace GameLIB.Scripts.Objects.Entities
 
             if (KeyboardInput.GetKeyHold(Keys.W))
             {
-                mov.Y = -1;
+                mov.Y = -0.1f;
             }
 
             else if (KeyboardInput.GetKeyHold(Keys.S))
             {
-                mov.Y = 1;
+                mov.Y = 0.1f;
             }
 
             else
@@ -66,12 +66,12 @@ namespace GameLIB.Scripts.Objects.Entities
 
             if (KeyboardInput.GetKeyHold(Keys.D))
             {
-                mov.X = 1;
+                mov.X = 0.1f;
             }
 
             else if (KeyboardInput.GetKeyHold(Keys.A))
             {
-                mov.X = -1;
+                mov.X = -0.1f;
             }
 
             else
